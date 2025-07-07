@@ -1,0 +1,1877 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Perito Expert - Peritaje Automotriz Profesional</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Racing+Sans+One&family=Exo+2:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #00a859; /* Verde F1 */
+            --secondary: #991813e8; /* Rojo F1 */
+            --dark: #15151e; /* Fondo oscuro */
+            --light: #ffffff;
+            --accent: #ffd700; /* Amarillo para acentos */
+            --carbon: #242424; /* Gris carbón */
+            --speed: #006f62; /* Verde velocidad */
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            background-color: var(--dark);
+            color: var(--light);
+            font-family: 'Exo 2', sans-serif;
+            overflow-x: hidden;
+            -webkit-text-size-adjust: 100%; /* Evita zoom automático en iOS */
+        }
+        
+        h1, h2, h3, h4 {
+            font-family: 'Racing Sans One', cursive;
+            letter-spacing: 1px;
+        }
+        
+        /* Efecto de neón */
+        .neon-text {
+            text-shadow: 0 0 5px var(--primary), 0 0 10px var(--primary), 0 0 20px var(--primary);
+        }
+        
+        /* Header con efecto de pista */
+        header {
+            background: linear-gradient(to bottom, rgba(21, 21, 30, 0.9), rgba(21, 21, 30, 0.7));
+            position: fixed;
+            width: 100%;
+            z-index: 1000;
+            padding: 1rem 2rem;
+            transition: all 0.3s ease;
+            border-bottom: 2px solid var(--primary);
+        }
+        
+        header::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, 
+                transparent, 
+                var(--primary), 
+                var(--secondary), 
+                var(--primary), 
+                transparent);
+            background-size: 200% 100%;
+            animation: trackLine 3s linear infinite;
+        }
+        
+        @keyframes trackLine {
+            0% { background-position: 200% 0; }
+            100% { background-position: -200% 0; }
+        }
+        
+        header.scrolled {
+            padding: 0.5rem 2rem;
+            background: rgba(21, 21, 30, 0.95);
+        }
+        
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .logo img {
+            height: 50px;
+            transition: all 0.3s ease;
+            width: auto;
+        }
+        
+        .logo img:hover {
+            transform: scale(1.05);
+            filter: drop-shadow(0 0 5px var(--primary));
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+        
+        .nav-links a {
+            text-decoration: none;
+            color: var(--light);
+            font-weight: 600;
+            font-size: 1.1rem;
+            position: relative;
+            padding: 0.5rem 0;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .nav-links a:hover {
+            color: var(--primary);
+            transform: translateY(-3px);
+            text-shadow: 0 0 5px rgba(0, 168, 89, 0.5);
+        }
+        
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 0;
+            background-color: var(--primary);
+            transition: width 0.3s ease;
+        }
+        
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+        
+        .menu-toggle {
+            display: none;
+            cursor: pointer;
+            font-size: 1.5rem;
+            color: var(--light);
+            z-index: 1001;
+        }
+        
+        /* Hero Section con efecto de velocidad */
+        .hero {
+            height: 100vh;
+            min-height: 600px;
+            display: flex;
+            align-items: center;
+            padding: 6rem 2rem 2rem;
+            position: relative;
+            overflow: hidden;
+            background: url('1.jpg') no-repeat center center/cover;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, rgba(21, 21, 30, 0.8) 0%, rgba(21, 21, 30, 0.5) 100%);
+        }
+        
+        .hero-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .hero-text {
+            flex: 1;
+            padding-right: 2rem;
+        }
+        
+        .hero-text h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+            line-height: 1.1;
+            color: var(--light);
+            text-transform: uppercase;
+        }
+        
+        .hero-text h1 span {
+            color: var(--primary);
+        }
+        
+        .hero-text p {
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+            color: #cbd5e1;
+            max-width: 600px;
+        }
+        
+        .cta-button {
+            display: inline-block;
+            padding: 0.8rem 2rem;
+            background: linear-gradient(to right, var(--primary), var(--speed));
+            color: white;
+            border-radius: 0;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+            border: 2px solid var(--primary);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .cta-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: all 0.5s ease;
+        }
+        
+        .cta-button:hover::before {
+            left: 100%;
+        }
+        
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 168, 89, 0.4);
+        }
+        
+        .hero-image {
+            flex: 1;
+            position: relative;
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+            100% { transform: translateY(0px); }
+        }
+        
+        .hero-image img {
+            width: 100%;
+            max-width: 600px;
+            border-radius: 5px;
+            border: 3px solid var(--primary);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+            transition: all 0.3s ease;
+            height: auto;
+        }
+        
+        .hero-image:hover img {
+            transform: scale(1.02);
+        }
+        
+        /* Carrusel de Banners con efecto de neumático */
+        .banner-section {
+            padding: 4rem 0;
+            background-color: var(--carbon);
+            position: relative;
+        }
+        
+        .banner-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 10px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary), var(--primary));
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 2rem;
+            padding: 0 1.5rem;
+        }
+        
+        .section-title h2 {
+            font-size: 2.2rem;
+            color: var(--light);
+            margin-bottom: 1rem;
+            position: relative;
+            display: inline-block;
+            text-transform: uppercase;
+        }
+        
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            width: 50%;
+            height: 4px;
+            bottom: -10px;
+            left: 25%;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            border-radius: 2px;
+        }
+        
+        .section-title p {
+            color: #cbd5e1;
+            max-width: 700px;
+            margin: 0 auto;
+            font-size: 1rem;
+        }
+        
+        .carousel {
+            position: relative;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+        
+        .carousel-container {
+            display: flex;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            scroll-behavior: smooth;
+            -webkit-overflow-scrolling: touch;
+            padding: 1rem 0;
+            gap: 1rem;
+        }
+        
+        .carousel-item {
+            min-width: 280px;
+            scroll-snap-align: start;
+            border-radius: 5px;
+            overflow: hidden;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3);
+            transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+            position: relative;
+            border: 2px solid var(--carbon);
+        }
+        
+        .carousel-item:hover {
+            transform: translateY(-10px);
+            border-color: var(--primary);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.3);
+        }
+        
+        .carousel-item img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+            transition: all 0.5s ease;
+        }
+        
+        .carousel-item:hover img {
+            transform: scale(1.1);
+            filter: brightness(0.8) blur(1px);
+        }
+        
+        .carousel-content {
+            padding: 1.2rem;
+            background: var(--dark);
+            position: relative;
+        }
+        
+        .carousel-content::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+        }
+        
+        .carousel-content h3 {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+            color: var(--light);
+        }
+        
+        .carousel-content p {
+            color: #cbd5e1;
+            font-size: 0.9rem;
+        }
+        
+        .carousel-nav {
+            display: none; /* Ocultamos los botones en móvil */
+        }
+        
+        /* Sección Nosotros con efecto de tablero */
+        .about-section {
+            padding: 4rem 1.5rem;
+            background: url('2.jpg') no-repeat center center/cover;
+            position: relative;
+            background-attachment: scroll; /* Cambiado para mejor rendimiento en móvil */
+        }
+        
+        .about-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(21, 21, 30, 0.9);
+        }
+        
+        .about-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .about-image {
+            flex: 1;
+            position: relative;
+        }
+        
+        .about-image img {
+            width: 100%;
+            border-radius: 5px;
+            border: 3px solid var(--primary);
+            box-shadow: 0 15px 30px -10px rgba(0, 0, 0, 0.5);
+            transition: all 0.3s ease;
+        }
+        
+        .about-image:hover img {
+            transform: scale(1.02);
+        }
+        
+        .about-image::before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border: 2px solid var(--secondary);
+            border-radius: 5px;
+            top: 10px;
+            left: 10px;
+            z-index: -1;
+            transition: all 0.3s ease;
+        }
+        
+        .about-image:hover::before {
+            top: 8px;
+            left: 8px;
+        }
+        
+        .about-text {
+            flex: 1;
+        }
+        
+        .about-text h2 {
+            font-size: 2.2rem;
+            margin-bottom: 1.2rem;
+            color: var(--light);
+            position: relative;
+            display: inline-block;
+            text-transform: uppercase;
+        }
+        
+        .about-text h2::after {
+            content: '';
+            position: absolute;
+            width: 50%;
+            height: 4px;
+            bottom: -8px;
+            left: 0;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            border-radius: 2px;
+        }
+        
+        .about-text p {
+            margin-bottom: 1.2rem;
+            color: #cbd5e1;
+            line-height: 1.6;
+            font-size: 1rem;
+        }
+        
+        .about-features {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1.2rem;
+            margin-top: 1.5rem;
+        }
+        
+        .feature-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            background: rgba(42, 42, 50, 0.5);
+            padding: 1rem;
+            border-radius: 5px;
+            border-left: 3px solid var(--primary);
+            transition: all 0.3s ease;
+        }
+        
+        .feature-item:hover {
+            transform: translateX(5px);
+            background: rgba(42, 42, 50, 0.8);
+        }
+        
+        .feature-icon {
+            width: 45px;
+            height: 45px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border-radius: 5px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.1rem;
+            flex-shrink: 0;
+        }
+        
+        .feature-text h3 {
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+            color: var(--light);
+        }
+        
+        .feature-text p {
+            margin-bottom: 0;
+            font-size: 0.9rem;
+        }
+        
+        /* Sección Servicios con estilo de cuadro de mando */
+        .services-section {
+            padding: 4rem 1.5rem;
+            background-color: var(--dark);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .services-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('3.jpg') no-repeat center center/cover;
+            opacity: 0.1;
+            z-index: 0;
+        }
+        
+        .services-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .services-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+        
+        .service-card {
+            background: var(--carbon);
+            border-radius: 5px;
+            overflow: hidden;
+            box-shadow: 0 8px 12px -3px rgba(0, 0, 0, 0.3);
+            transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+            position: relative;
+            z-index: 1;
+            border: 1px solid rgba(0, 168, 89, 0.3);
+        }
+        
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(0, 168, 89, 0.1) 0%, rgba(225, 6, 0, 0.1) 100%);
+            z-index: -1;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .service-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 20px -5px rgba(0, 0, 0, 0.3);
+            border-color: var(--primary);
+        }
+        
+        .service-card:hover::before {
+            opacity: 1;
+        }
+        
+        .service-image {
+            height: 180px;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .service-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: all 0.5s ease;
+        }
+        
+        .service-card:hover .service-image img {
+            transform: scale(1.1);
+        }
+        
+        .service-content {
+            padding: 1.2rem;
+        }
+        
+        .service-content h3 {
+            font-size: 1.3rem;
+            margin-bottom: 0.8rem;
+            color: var(--light);
+            text-transform: uppercase;
+        }
+        
+        .service-content p {
+            color: #cbd5e1;
+            margin-bottom: 1.2rem;
+            line-height: 1.6;
+            font-size: 0.95rem;
+        }
+        
+        .service-price {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 1.2rem;
+            display: flex;
+            align-items: center;
+        }
+        
+        .service-price::before {
+            content: '➤';
+            margin-right: 0.5rem;
+            color: var(--secondary);
+        }
+        
+        .service-button {
+            display: inline-block;
+            padding: 0.6rem 1.5rem;
+            background-color: transparent;
+            color: var(--primary);
+            border-radius: 0;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: 2px solid var(--primary);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 0.9rem;
+        }
+        
+        .service-button:hover {
+            background-color: var(--primary);
+            color: white;
+        }
+        
+        /* Sección Productos con estilo de neumáticos */
+        .products-section {
+            padding: 4rem 1.5rem;
+            background: linear-gradient(135deg, rgba(0, 111, 98, 0.05) 0%, rgba(21, 21, 30, 0.9) 100%);
+            position: relative;
+        }
+        
+        .products-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 8px;
+            background: linear-gradient(90deg, var(--secondary), var(--primary), var(--secondary));
+        }
+        
+        .products-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+        
+        .product-card {
+            background: var(--carbon);
+            border-radius: 50% 50% 5px 5px;
+            overflow: hidden;
+            box-shadow: 0 8px 12px -3px rgba(0, 0, 0, 0.3);
+            transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+            position: relative;
+            border-top: 4px solid var(--primary);
+        }
+        
+        .product-card:hover {
+            transform: translateY(-8px) scale(1.03);
+            box-shadow: 0 15px 20px -5px rgba(0, 0, 0, 0.3);
+            border-top-color: var(--secondary);
+        }
+        
+        .product-card::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at center, rgba(0, 168, 89, 0.2) 0%, rgba(21, 21, 30, 0) 70%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .product-card:hover::after {
+            opacity: 1;
+        }
+        
+        .product-image {
+            height: 160px;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .product-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: all 0.5s ease;
+        }
+        
+        .product-card:hover .product-image img {
+            transform: scale(1.1);
+        }
+        
+        .product-content {
+            padding: 1.2rem;
+            text-align: center;
+        }
+        
+        .product-content h3 {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+            color: var(--light);
+            text-transform: uppercase;
+        }
+        
+        .product-content p {
+            color: #cbd5e1;
+            margin-bottom: 1rem;
+            font-size: 0.85rem;
+        }
+        
+        .product-price {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+        
+        .product-button {
+            display: inline-block;
+            padding: 0.5rem 1.2rem;
+            background-color: var(--primary);
+            color: white;
+            border-radius: 0;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border: 2px solid var(--primary);
+        }
+        
+        .product-button:hover {
+            background-color: transparent;
+            color: var(--primary);
+        }
+        
+        /* Sección Contacto con estilo de garaje */
+        .contact-section {
+            padding: 4rem 1.5rem;
+            background-color: var(--dark);
+            background-image: 
+                linear-gradient(rgba(42, 42, 50, 0.7) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(42, 42, 50, 0.7) 1px, transparent 1px);
+            background-size: 20px 20px;
+            position: relative;
+        }
+        
+        .contact-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+        
+        .contact-info {
+            flex: 1;
+        }
+        
+        .contact-info h2 {
+            font-size: 2.2rem;
+            margin-bottom: 1.2rem;
+            color: var(--light);
+            position: relative;
+            display: inline-block;
+            text-transform: uppercase;
+        }
+        
+        .contact-info h2::after {
+            content: '';
+            position: absolute;
+            width: 50%;
+            height: 4px;
+            bottom: -8px;
+            left: 0;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            border-radius: 2px;
+        }
+        
+        .contact-info p {
+            color: #cbd5e1;
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+            font-size: 1rem;
+        }
+        
+        .contact-details {
+            display: flex;
+            flex-direction: column;
+            gap: 1.2rem;
+        }
+        
+        .contact-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+        }
+        
+        .contact-icon {
+            width: 45px;
+            height: 45px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border-radius: 5px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.1rem;
+            flex-shrink: 0;
+        }
+        
+        .contact-text h3 {
+            font-size: 1.1rem;
+            margin-bottom: 0.3rem;
+            color: var(--light);
+        }
+        
+        .contact-text p, .contact-text a {
+            color: #cbd5e1;
+            text-decoration: none;
+            transition: color 0.3s ease;
+            font-size: 0.95rem;
+        }
+        
+        .contact-text a:hover {
+            color: var(--primary);
+        }
+        
+        .contact-form {
+            flex: 1;
+            background: var(--carbon);
+            border-radius: 5px;
+            padding: 1.5rem;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+            border: 1px solid var(--primary);
+        }
+        
+        .form-group {
+            margin-bottom: 1.2rem;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: var(--light);
+            font-size: 0.95rem;
+        }
+        
+        .form-group input, .form-group textarea {
+            width: 100%;
+            padding: 0.7rem 1rem;
+            border: 1px solid #3e3e48;
+            border-radius: 0;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+            background: var(--dark);
+            color: var(--light);
+        }
+        
+        .form-group input:focus, .form-group textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(0, 168, 89, 0.1);
+        }
+        
+        .form-group textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+        
+        .submit-button {
+            display: inline-block;
+            padding: 0.8rem 1.8rem;
+            background: linear-gradient(to right, var(--primary), var(--speed));
+            color: white;
+            border: none;
+            border-radius: 0;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+            width: 100%;
+        }
+        
+        .submit-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: all 0.5s ease;
+        }
+        
+        .submit-button:hover::before {
+            left: 100%;
+        }
+        
+        .submit-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 168, 89, 0.4);
+        }
+        
+        /* WhatsApp Button con efecto de neón */
+        .whatsapp-button {
+            position: fixed;
+            bottom: 1.5rem;
+            right: 1.5rem;
+            width: 60px;
+            height: 60px;
+            background-color: #25D366;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.8rem;
+            box-shadow: 0 4px 15px rgba(37, 211, 102, 0.5);
+            z-index: 999;
+            transition: all 0.3s ease;
+            animation: pulse 2s infinite, neonWhatsapp 1.5s ease-in-out infinite alternate;
+            border: 2px solid white;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+        
+        @keyframes neonWhatsapp {
+            from {
+                box-shadow: 0 0 5px #25D366, 0 0 10px #25D366, 0 0 15px #25D366, 0 0 20px #25D366;
+            }
+            to {
+                box-shadow: 0 0 10px #25D366, 0 0 20px #25D366, 0 0 30px #25D366, 0 0 40px #25D366;
+            }
+        }
+        
+        .whatsapp-button:hover {
+            transform: scale(1.1);
+            background-color: #128C7E;
+        }
+        
+        /* Footer con estilo de escape */
+        footer {
+            background-color: var(--carbon);
+            color: white;
+            padding: 3rem 1.5rem 1.5rem;
+            position: relative;
+        }
+        
+        footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary), var(--primary));
+        }
+        
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2rem;
+        }
+        
+        .footer-logo img {
+            height: 50px;
+            margin-bottom: 1.2rem;
+            width: auto;
+        }
+        
+        .footer-about p {
+            color: #94a3b8;
+            margin-bottom: 1.2rem;
+            line-height: 1.6;
+            font-size: 0.95rem;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 0.8rem;
+        }
+        
+        .social-link {
+            width: 38px;
+            height: 38px;
+            border-radius: 5px;
+            background-color: rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+        }
+        
+        .social-link:hover {
+            background-color: var(--primary);
+            transform: translateY(-3px);
+        }
+        
+        .footer-links h3 {
+            font-size: 1.2rem;
+            margin-bottom: 1.2rem;
+            position: relative;
+            display: inline-block;
+            text-transform: uppercase;
+        }
+        
+        .footer-links h3::after {
+            content: '';
+            position: absolute;
+            width: 50%;
+            height: 3px;
+            bottom: -6px;
+            left: 0;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            border-radius: 2px;
+        }
+        
+        .footer-links ul {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 0.7rem;
+        }
+        
+        .footer-links a {
+            color: #94a3b8;
+            text-decoration: none;
+            transition: color 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            text-transform: uppercase;
+            font-size: 0.85rem;
+            letter-spacing: 1px;
+        }
+        
+        .footer-links a:hover {
+            color: var(--primary);
+        }
+        
+        .footer-links a i {
+            font-size: 0.7rem;
+            color: var(--primary);
+        }
+        
+        .footer-contact .contact-item {
+            margin-bottom: 0.8rem;
+        }
+        
+        .footer-contact .contact-icon {
+            width: 38px;
+            height: 38px;
+            font-size: 0.9rem;
+        }
+        
+        .footer-bottom {
+            max-width: 1200px;
+            margin: 2rem auto 0;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            text-align: center;
+            color: #94a3b8;
+            font-size: 0.85rem;
+        }
+        
+        /* Efectos de velocidad */
+        .speed-line {
+            position: absolute;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--primary), transparent);
+            animation: speedEffect 2s linear infinite;
+            opacity: 0;
+        }
+        
+        @keyframes speedEffect {
+            0% { transform: translateX(-100%); opacity: 0; }
+            50% { opacity: 1; }
+            100% { transform: translateX(100%); opacity: 0; }
+        }
+        
+        /* Mejoras para dispositivos móviles */
+        @media (max-width: 992px) {
+            .hero-content {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .hero-text {
+                padding-right: 0;
+                margin-bottom: 2rem;
+            }
+            
+            .hero-text h1 {
+                font-size: 2.8rem;
+            }
+            
+            .hero-text p {
+                margin-left: auto;
+                margin-right: auto;
+            }
+            
+            .hero-image {
+                margin-top: 2rem;
+            }
+            
+            .about-container, .contact-container {
+                flex-direction: column;
+            }
+            
+            .about-image {
+                margin-bottom: 2rem;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .menu-toggle {
+                display: block;
+            }
+            
+            .nav-links {
+                position: fixed;
+                top: 80px;
+                left: -100%;
+                width: 100%;
+                height: calc(100vh - 80px);
+                background: var(--carbon);
+                flex-direction: column;
+                align-items: center;
+                justify-content: flex-start;
+                gap: 1.5rem;
+                transition: all 0.3s ease;
+                z-index: 999;
+                border-top: 2px solid var(--primary);
+                padding-top: 2rem;
+                overflow-y: auto;
+            }
+            
+            .nav-links.active {
+                left: 0;
+            }
+            
+            .hero-text h1 {
+                font-size: 2.2rem;
+            }
+            
+            .hero-text p {
+                font-size: 1rem;
+            }
+            
+            .section-title h2 {
+                font-size: 1.8rem;
+            }
+            
+            .about-text h2, .contact-info h2 {
+                font-size: 1.8rem;
+            }
+            
+            .footer-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .footer-links {
+                margin-top: 1.5rem;
+            }
+            
+            /* Ajustes para el formulario en móviles */
+            .contact-form {
+                padding: 1.2rem;
+            }
+            
+            .form-group input, .form-group textarea {
+                padding: 0.7rem;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .hero {
+                padding: 6rem 1.5rem 2rem;
+                min-height: 500px;
+            }
+            
+            .hero-text h1 {
+                font-size: 1.8rem;
+            }
+            
+            .cta-button, .submit-button {
+                padding: 0.7rem 1.5rem;
+                font-size: 0.95rem;
+            }
+            
+            .section-title h2 {
+                font-size: 1.6rem;
+            }
+            
+            .about-text h2, .contact-info h2 {
+                font-size: 1.6rem;
+            }
+            
+            .whatsapp-button {
+                width: 55px;
+                height: 55px;
+                font-size: 1.6rem;
+                bottom: 1rem;
+                right: 1rem;
+            }
+            
+            /* Ajustes para el carrusel en móviles pequeños */
+            .carousel-item {
+                min-width: 260px;
+            }
+            
+            /* Ajustes para las tarjetas de productos */
+            .products-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        /* Optimización para iOS */
+        @supports (-webkit-touch-callout: none) {
+            /* Ajustes específicos para Safari en iOS */
+            .hero {
+                height: -webkit-fill-available;
+                min-height: -webkit-fill-available;
+            }
+            
+            input, textarea, button {
+                font-size: 16px; /* Evita el zoom automático en iOS */
+            }
+        }
+        
+        /* Mejoras de accesibilidad */
+        a:focus, button:focus, input:focus, textarea:focus {
+            outline: 2px solid var(--primary);
+            outline-offset: 2px;
+        }
+        
+        /* Mejoras de rendimiento */
+        .hero, .about-section {
+            will-change: transform;
+        }
+        
+        /* Prevenir desplazamiento horizontal en móviles */
+        html, body {
+            max-width: 100%;
+            overflow-x: hidden;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header con efecto de pista -->
+    <header id="header">
+        <nav>
+            <a href="#" class="logo"><img src="logo.png" alt="Perito Expert"></a>
+            <div class="menu-toggle" id="menuToggle">
+                <i class="fas fa-bars"></i>
+            </div>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#home">Inicio</a></li>
+                <li><a href="#about">Nosotros</a></li>
+                <li><a href="#services">Peritajes</a></li>
+                <li><a href="#products">Servicios</a></li>
+                <li><a href="#contact">Contacto</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Hero Section con efecto de velocidad -->
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <div class="hero-text">
+                <h1>PERITAJE <span>AUTOMOTRIZ</span> DE ÉLITE</h1>
+                <p>Expertos en evaluación técnica vehicular con precisión. Servicios profesionales para Peritajes antes de comprar o vender</p>
+                <a href="#contact" class="cta-button">SOLICITAR PERITAJE</a>
+            </div>
+            <div class="hero-image">
+                <img src="1.jpg" alt="Peritaje automotriz" loading="lazy">
+            </div>
+        </div>
+    </section>
+
+    <!-- Carrusel de Banners con efecto de neumático -->
+    <section class="banner-section">
+        <div class="section-title">
+            <h2>Nuestros Trabajos</h2>
+            <p>Algunos ejemplos de nuestros peritajes y evaluaciones técnicas</p>
+        </div>
+        <div class="carousel">
+            <div class="carousel-container" id="carousel">
+                <div class="carousel-item">
+                    <div class="carousel-image">
+                        <img src="banner-1.jpg" alt="Peritaje de colisión" loading="lazy">
+                    </div>
+                    <div class="carousel-content">
+                        <h3>Análisis de Colisión</h3>
+                        <p>Evaluación técnica detallada de daños por accidente</p>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <div class="carousel-image">
+                        <img src="banner-2.jpg" alt="Evaluación precompra" loading="lazy">
+                    </div>
+                    <div class="carousel-content">
+                        <h3>Inspección Precompra</h3>
+                        <p>Revisión exhaustiva antes de adquirir un vehículo</p>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <div class="carousel-image">
+                        <img src="banner-3.jpg" alt="Peritaje mecánico" loading="lazy">
+                    </div>
+                    <div class="carousel-content">
+                        <h3>Diagnóstico Mecánico</h3>
+                        <p>Evaluación profesional del estado mecánico del vehículo</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sección Nosotros con efecto de tablero -->
+    <section class="about-section" id="about">
+        <div class="about-container">
+            <div class="about-image">
+                <img src="2.jpg" alt="Nuestro equipo de peritos" loading="lazy">
+            </div>
+            <div class="about-text">
+                <h2>Expertos en Motor</h2>
+                <p>En Perito Expert combinamos pasión por los automóviles con rigor técnico profesional. Nuestro equipo está formado por ingenieros y técnicos especializados con amplia experiencia en el sector automotriz.</p>
+                <p>Utilizamos tecnología de diagnóstico de última generación y metodologías precisas para ofrecer evaluaciones imparciales y detalladas.</p>
+                <div class="about-features">
+                    <div class="feature-item">
+                        <div class="feature-icon">
+                            <i class="fas fa-tachometer-alt"></i>
+                        </div>
+                        <div class="feature-text">
+                            <h3>Precisión</h3>
+                            <p>Análisis técnicos con exactitud milimétrica</p>
+                        </div>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-icon">
+                            <i class="fas fa-car-crash"></i>
+                        </div>
+                        <div class="feature-text">
+                            <h3>Experiencia</h3>
+                            <p>Más de 1,000 peritajes realizados</p>
+                        </div>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-icon">
+                            <i class="fas fa-certificate"></i>
+                        </div>
+                        <div class="feature-text">
+                            <h3>Certificaciones</h3>
+                            <p>Profesionales acreditados internacionalmente</p>
+                        </div>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-icon">
+                            <i class="fas fa-bolt"></i>
+                        </div>
+                        <div class="feature-text">
+                            <h3>Rapidez</h3>
+                            <p>Informes en 1 - 2 horas</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sección Servicios con estilo de cuadro de mando -->
+    <section class="services-section" id="services">
+        <div class="services-container">
+            <div class="section-title">
+                <h2>Tipos de Peritaje</h2>
+                <p>Servicios especializados de evaluación técnica vehicular</p>
+            </div>
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-image">
+                        <img src="3.jpg" alt="Peritaje por siniestro" loading="lazy">
+                    </div>
+                    <div class="service-content">
+                        <h3>Peritaje ORO</h3>
+                        <p>Escaneo del motor (detecta si el velocímetro ha sido adulterado o si se han borrado códigos de falla). Verificación de golpes mediante espesor de pintura. Revisión de la estructura del chasis (accidentes o golpes anteriores).</p>
+                        <div class="service-price">VALOR $250.000</div>
+                        <a href="#contact" class="service-button">SOLICITAR</a>
+                    </div>
+                </div>
+                <div class="service-card">
+                    <div class="service-image">
+                        <img src="4.jpg" alt="Evaluación precompra" loading="lazy">
+                    </div>
+                    <div class="service-content">
+                        <h3>PERITAJE PLATA</h3>
+                        <p>Escaneo del motor (detecta si el velocímetro ha sido adulterado o si se han borrado códigos de falla). Verificación de golpes mediante espesor de pintura. Revisión de la estructura del chasis (accidentes o golpes anteriores).</p>
+                        <div class="service-price">Desde $200.000</div>
+                        <a href="#contact" class="service-button">SOLICITAR</a>
+                    </div>
+                </div>
+                <div class="service-card">
+                    <div class="service-image">
+                        <img src="5.jpg" alt="Peritaje mecánico" loading="lazy">
+                    </div>
+                    <div class="service-content">
+                        <h3>PERITAJE BRONCE</h3>
+                        <p>Escaneo del motor (detecta si el velocímetro ha sido adulterado o si se han borrado códigos de falla). Verificación de golpes mediante espesor de pintura. Revisión de la estructura del chasis (accidentes o golpes anteriores).</p>
+                        <div class="service-price">Desde $150.000</div>
+                        <a href="#contact" class="service-button">SOLICITAR</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sección Productos con estilo de neumáticos -->
+    <section class="products-section" id="products">
+        <div class="products-container">
+            <div class="section-title">
+                <h2>Servicios Adicionales</h2>
+                <p>Complementa tu peritaje con estos servicios especializados</p>
+            </div>
+            <div class="products-grid">
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="4.jpg" alt="Limpieza interior" loading="lazy">
+                    </div>
+                    <div class="product-content">
+                        <h3>Limpieza del interior</h3>
+                        <p>Realizamos limpieza completa de la parte interna de tu vehiculo</p>
+                        <div class="product-price">$150.000</div>
+                        <a href="#contact" class="product-button">CONTRATAR</a>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="5.jpg" alt="Análisis de kilometraje" loading="lazy">
+                    </div>
+                    <div class="product-content">
+                        <h3>Análisis de Kilometraje</h3>
+                        <p>Verificación profesional para detectar alteraciones en el odómetro mediante técnicas avanzadas.</p>
+                        <div class="product-price">$100.000</div>
+                        <a href="#contact" class="product-button">CONTRATAR</a>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="6.jpg" alt="Informe ejecutivo" loading="lazy">
+                    </div>
+                    <div class="product-content">
+                        <h3>Informe Ejecutivo</h3>
+                        <p>Documento resumido con hallazgos clave y recomendaciones para toma de decisiones.</p>
+                        <div class="product-price">$120.000</div>
+                        <a href="#contact" class="product-button">CONTRATAR</a>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="3.jpg" alt="Revisión motor" loading="lazy">
+                    </div>
+                    <div class="product-content">
+                        <h3>Revisión profunda del motor</h3>
+                        <p>Con apoyo de tecnología avanzada realizamos una evaluación profunda del Motor.</p>
+                        <div class="product-price">$110.000</div>
+                        <a href="#contact" class="product-button">CONTRATAR</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sección Contacto con estilo de garaje -->
+    <section class="contact-section" id="contact">
+        <div class="contact-container">
+            <div class="contact-info">
+                <h2>Agenda tu Peritaje</h2>
+                <p>Programa una inspección o solicita más información sobre nuestros servicios profesionales.</p>
+                <div class="contact-details">
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <div class="contact-text">
+                            <h3>Ubicación</h3>
+                            <p>Realizamos el servicio a domicilio, en la ciudad de Bogotá</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-phone-alt"></i>
+                        </div>
+                        <div class="contact-text">
+                            <h3>Teléfono</h3>
+                            <p><a href="tel:+573007152606">+52 300 715 2606</a></p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <div class="contact-text">
+                            <h3>Email</h3>
+                            <p><a href="mailto:peritoexpert.bogota@gmail.com">peritoexpert.bogota@gmail.com</a></p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <div class="contact-text">
+                            <h3>Horario</h3>
+                            <p>Lunes a Viernes: 8:00 - 18:00</p>
+                            <p>Sábados: 9:00 - 14:00</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="contact-form">
+                <form id="contactForm" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+                    <div class="form-group">
+                        <label for="name">Nombre Completo</label>
+                        <input type="text" id="name" name="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Correo Electrónico</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">Teléfono</label>
+                        <input type="tel" id="phone" name="phone" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="message">Detalles del Vehículo</label>
+                        <textarea id="message" name="message" required placeholder="Marca, modelo, año y motivo de la evaluación"></textarea>
+                    </div>
+                    <button type="submit" class="submit-button">ENVIAR SOLICITUD</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- WhatsApp Button con efecto de neón -->
+    <a href="https://wa.me/3007152606" class="whatsapp-button" target="_blank" aria-label="Contactar por WhatsApp">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <!-- Footer con estilo de escape -->
+    <footer>
+        <div class="footer-container">
+            <div class="footer-about">
+                <a href="#" class="logo"><img src="logo.png" alt="Perito Expert" loading="lazy"></a>
+                <p>Expertos en peritaje automotriz con estándares profesionales y tecnología de punta para evaluaciones técnicas precisas.</p>
+                <div class="social-links">
+                    <a href="#" class="social-link" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" class="social-link" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="#" class="social-link" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="#" class="social-link" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+            <div class="footer-links">
+                <h3>Servicios</h3>
+                <ul>
+                    <li><a href="#"><i class="fas fa-chevron-right"></i> Peritaje por Siniestro</a></li>
+                    <li><a href="#"><i class="fas fa-chevron-right"></i> Evaluación Precompra</a></li>
+                    <li><a href="#"><i class="fas fa-chevron-right"></i> Diagnóstico Mecánico</a></li>
+                    <li><a href="#"><i class="fas fa-chevron-right"></i> Valuación Oficial</a></li>
+                    <li><a href="#"><i class="fas fa-chevron-right"></i> Asesoría Legal</a></li>
+                </ul>
+            </div>
+            <div class="footer-links">
+                <h3>Enlaces</h3>
+                <ul>
+                    <li><a href="#home"><i class="fas fa-chevron-right"></i> Inicio</a></li>
+                    <li><a href="#about"><i class="fas fa-chevron-right"></i> Nosotros</a></li>
+                    <li><a href="#services"><i class="fas fa-chevron-right"></i> Peritajes</a></li>
+                    <li><a href="#products"><i class="fas fa-chevron-right"></i> Servicios</a></li>
+                    <li><a href="#contact"><i class="fas fa-chevron-right"></i> Contacto</a></li>
+                </ul>
+            </div>
+            <div class="footer-contact">
+                <h3>Contacto</h3>
+                <div class="contact-item">
+                    <div class="contact-icon">
+                        <i class="fas fa-map-marker-alt"></i>
+                    </div>
+                    <div class="contact-text">
+                        <p>Bogotá</p>
+                    </div>
+                </div>
+                <div class="contact-item">
+                    <div class="contact-icon">
+                        <i class="fas fa-phone-alt"></i>
+                    </div>
+                    <div class="contact-text">
+                        <p><a href="tel:+573007152606">+52 300 715 2606</a></p>
+                    </div>
+                </div>
+                <div class="contact-item">
+                    <div class="contact-icon">
+                        <i class="fas fa-envelope"></i>
+                    </div>
+                    <div class="contact-text">
+                        <p><a href="mailto:peritoexpert.bogota@gmail.com">peritoexpert.bogota@gmail.com</a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 Perito Expert. Todos los derechos reservados. | <a href="#">Aviso de Privacidad</a></p>
+        </div>
+    </footer>
+
+    <script>
+        // Menú móvil mejorado
+        const menuToggle = document.getElementById('menuToggle');
+        const navLinks = document.getElementById('navLinks');
+        
+        menuToggle.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+            menuToggle.classList.toggle('active');
+            
+            // Cambiar icono del menú
+            if (navLinks.classList.contains('active')) {
+                menuToggle.innerHTML = '<i class="fas fa-times"></i>';
+            } else {
+                menuToggle.innerHTML = '<i class="fas fa-bars"></i>';
+            }
+        });
+        
+        // Cerrar menú al hacer clic en un enlace
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+                menuToggle.innerHTML = '<i class="fas fa-bars"></i>';
+            });
+        });
+        
+        // Cambiar header al hacer scroll
+        const header = document.getElementById('header');
+        
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+        
+        // Carrusel mejorado para móviles
+        const carousel = document.getElementById('carousel');
+        let isDown = false;
+        let startX;
+        let scrollLeft;
+
+        carousel.addEventListener('mousedown', (e) => {
+            isDown = true;
+            startX = e.pageX - carousel.offsetLeft;
+            scrollLeft = carousel.scrollLeft;
+        });
+
+        carousel.addEventListener('mouseleave', () => {
+            isDown = false;
+        });
+
+        carousel.addEventListener('mouseup', () => {
+            isDown = false;
+        });
+
+        carousel.addEventListener('mousemove', (e) => {
+            if (!isDown) return;
+            e.preventDefault();
+            const x = e.pageX - carousel.offsetLeft;
+            const walk = (x - startX) * 2;
+            carousel.scrollLeft = scrollLeft - walk;
+        });
+
+        // También para eventos táctiles
+        carousel.addEventListener('touchstart', (e) => {
+            isDown = true;
+            startX = e.touches[0].pageX - carousel.offsetLeft;
+            scrollLeft = carousel.scrollLeft;
+        });
+
+        carousel.addEventListener('touchend', () => {
+            isDown = false;
+        });
+
+        carousel.addEventListener('touchmove', (e) => {
+            if (!isDown) return;
+            e.preventDefault();
+            const x = e.touches[0].pageX - carousel.offsetLeft;
+            const walk = (x - startX) * 2;
+            carousel.scrollLeft = scrollLeft - walk;
+        });
+        
+        // Formulario de contacto
+        const contactForm = document.getElementById('contactForm');
+        
+        contactForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const submitButton = this.querySelector('button[type="submit"]');
+            submitButton.disabled = true;
+            submitButton.textContent = 'Enviando...';
+            
+            const formData = new FormData(this);
+            
+            fetch(this.action, {
+                method: 'POST',
+                body: formData,
+                headers: {
+                    'Accept': 'application/json'
+                }
+            })
+            .then(response => {
+                if (response.ok) {
+                    alert('Solicitud enviada con éxito. Nos pondremos en contacto contigo pronto.');
+                    contactForm.reset();
+                } else {
+                    throw new Error('Error al enviar el formulario');
+                }
+            })
+            .catch(error => {
+                alert('Hubo un problema al enviar tu solicitud. Por favor, inténtalo de nuevo más tarde.');
+                console.error(error);
+            })
+            .finally(() => {
+                submitButton.disabled = false;
+                submitButton.textContent = 'ENVIAR SOLICITUD';
+            });
+        });
+        
+        // Smooth scrolling para enlaces
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                    
+                    // Cerrar menú móvil si está abierto
+                    if (navLinks.classList.contains('active')) {
+                        navLinks.classList.remove('active');
+                        menuToggle.innerHTML = '<i class="fas fa-bars"></i>';
+                    }
+                }
+            });
+        });
+        
+        // Optimización para iOS - Evitar zoom en inputs
+        document.addEventListener('DOMContentLoaded', function() {
+            if (navigator.userAgent.match(/iPhone|iPad|iPod/i)) {
+                document.querySelectorAll('input, textarea').forEach(el => {
+                    el.addEventListener('focus', function() {
+                        window.scrollTo(0, 0);
+                        document.body.scrollTop = 0;
+                    });
+                });
+            }
+        });
+        
+        // Efectos de velocidad aleatorios (solo en desktop)
+        function createSpeedLine() {
+            if (window.innerWidth > 768) {
+                const speedLine = document.createElement('div');
+                speedLine.classList.add('speed-line');
+                
+                const viewportHeight = window.innerHeight;
+                const randomTop = Math.random() * viewportHeight;
+                
+                const randomWidth = 100 + Math.random() * 300;
+                
+                speedLine.style.top = `${randomTop}px`;
+                speedLine.style.width = `${randomWidth}px`;
+                speedLine.style.animationDuration = `${1 + Math.random() * 2}s`;
+                speedLine.style.animationDelay = `${Math.random() * 3}s`;
+                
+                document.body.appendChild(speedLine);
+                
+                setTimeout(() => {
+                    speedLine.remove();
+                }, 3000);
+            }
+        }
+        
+        // Crear líneas de velocidad cada cierto tiempo (solo en desktop)
+        if (window.innerWidth > 768) {
+            setInterval(createSpeedLine, 500);
+        }
+    </script>
+</body>
+</html>
