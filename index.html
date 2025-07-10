@@ -392,12 +392,156 @@
             display: none; /* Ocultamos los botones en móvil */
         }
         
-        /* Sección Nosotros con efecto de tablero */
+        /* Sección Servicios con estilo de cuadro de mando */
+        .services-section {
+            padding: 4rem 1.5rem;
+            background-color: var(--dark);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .services-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('3.jpg') no-repeat center center/cover;
+            opacity: 0.1;
+            z-index: 0;
+        }
+        
+        .services-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .services-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+        
+        .service-card {
+            background: var(--carbon);
+            border-radius: 5px;
+            overflow: hidden;
+            box-shadow: 0 8px 12px -3px rgba(0, 0, 0, 0.3);
+            transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+            position: relative;
+            z-index: 1;
+            border: 1px solid rgba(0, 168, 89, 0.3);
+        }
+        
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(0, 168, 89, 0.1) 0%, rgba(225, 6, 0, 0.1) 100%);
+            z-index: -1;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .service-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 20px -5px rgba(0, 0, 0, 0.3);
+            border-color: var(--primary);
+        }
+        
+        .service-card:hover::before {
+            opacity: 1;
+        }
+        
+        .service-image {
+            height: 180px;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .service-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: all 0.5s ease;
+        }
+        
+        .service-card:hover .service-image img {
+            transform: scale(1.1);
+        }
+        
+        .service-content {
+            padding: 1.2rem;
+            display: flex;
+            flex-direction: column;
+            height: calc(100% - 180px);
+        }
+        
+        .service-content h3 {
+            font-size: 1.3rem;
+            margin-bottom: 0.8rem;
+            color: var(--light);
+            text-transform: uppercase;
+        }
+        
+        .service-content p {
+            color: #cbd5e1;
+            margin-bottom: 1.2rem;
+            line-height: 1.6;
+            font-size: 0.95rem;
+            flex-grow: 1;
+        }
+        
+        .service-price {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 1.2rem;
+            display: flex;
+            align-items: center;
+        }
+        
+        .service-price::before {
+            content: '➤';
+            margin-right: 0.5rem;
+            color: var(--secondary);
+        }
+        
+        .service-button {
+            display: inline-block;
+            padding: 0.6rem 1.5rem;
+            background-color: transparent;
+            color: var(--primary);
+            border-radius: 0;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: 2px solid var(--primary);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 0.9rem;
+            text-align: center;
+            margin-top: auto;
+        }
+        
+        .service-button:hover {
+            background-color: var(--primary);
+            color: white;
+        }
+        
+        /* Sección Nosotros con efecto de tablero - MOVIDA DESPUÉS DE SERVICIOS */
         .about-section {
             padding: 4rem 1.5rem;
             background: url('2.jpg') no-repeat center center/cover;
             position: relative;
-            background-attachment: scroll; /* Cambiado para mejor rendimiento en móvil */
+            background-attachment: scroll;
         }
         
         .about-section::before {
@@ -533,144 +677,6 @@
             font-size: 0.9rem;
         }
         
-        /* Sección Servicios con estilo de cuadro de mando */
-        .services-section {
-            padding: 4rem 1.5rem;
-            background-color: var(--dark);
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .services-section::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: url('3.jpg') no-repeat center center/cover;
-            opacity: 0.1;
-            z-index: 0;
-        }
-        
-        .services-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            position: relative;
-            z-index: 1;
-        }
-        
-        .services-grid {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 1.5rem;
-            margin-top: 2rem;
-        }
-        
-        .service-card {
-            background: var(--carbon);
-            border-radius: 5px;
-            overflow: hidden;
-            box-shadow: 0 8px 12px -3px rgba(0, 0, 0, 0.3);
-            transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
-            position: relative;
-            z-index: 1;
-            border: 1px solid rgba(0, 168, 89, 0.3);
-        }
-        
-        .service-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(135deg, rgba(0, 168, 89, 0.1) 0%, rgba(225, 6, 0, 0.1) 100%);
-            z-index: -1;
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-        
-        .service-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 15px 20px -5px rgba(0, 0, 0, 0.3);
-            border-color: var(--primary);
-        }
-        
-        .service-card:hover::before {
-            opacity: 1;
-        }
-        
-        .service-image {
-            height: 180px;
-            overflow: hidden;
-            position: relative;
-        }
-        
-        .service-image img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: all 0.5s ease;
-        }
-        
-        .service-card:hover .service-image img {
-            transform: scale(1.1);
-        }
-        
-        .service-content {
-            padding: 1.2rem;
-        }
-        
-        .service-content h3 {
-            font-size: 1.3rem;
-            margin-bottom: 0.8rem;
-            color: var(--light);
-            text-transform: uppercase;
-        }
-        
-        .service-content p {
-            color: #cbd5e1;
-            margin-bottom: 1.2rem;
-            line-height: 1.6;
-            font-size: 0.95rem;
-        }
-        
-        .service-price {
-            font-size: 1.2rem;
-            font-weight: 700;
-            color: var(--primary);
-            margin-bottom: 1.2rem;
-            display: flex;
-            align-items: center;
-        }
-        
-        .service-price::before {
-            content: '➤';
-            margin-right: 0.5rem;
-            color: var(--secondary);
-        }
-        
-        .service-button {
-            display: inline-block;
-            padding: 0.6rem 1.5rem;
-            background-color: transparent;
-            color: var(--primary);
-            border-radius: 0;
-            text-decoration: none;
-            font-weight: 600;
-            transition: all 0.3s ease;
-            border: 2px solid var(--primary);
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            font-size: 0.9rem;
-        }
-        
-        .service-button:hover {
-            background-color: var(--primary);
-            color: white;
-        }
-        
         /* Sección Productos con estilo de neumáticos */
         .products-section {
             padding: 4rem 1.5rem;
@@ -702,16 +708,19 @@
         
         .product-card {
             background: var(--carbon);
-            border-radius: 50% 50% 5px 5px;
+            border-radius: 5px;
             overflow: hidden;
             box-shadow: 0 8px 12px -3px rgba(0, 0, 0, 0.3);
             transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
             position: relative;
             border-top: 4px solid var(--primary);
+            display: flex;
+            flex-direction: column;
+            height: 100%;
         }
         
         .product-card:hover {
-            transform: translateY(-8px) scale(1.03);
+            transform: translateY(-8px);
             box-shadow: 0 15px 20px -5px rgba(0, 0, 0, 0.3);
             border-top-color: var(--secondary);
         }
@@ -752,6 +761,9 @@
         .product-content {
             padding: 1.2rem;
             text-align: center;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
         }
         
         .product-content h3 {
@@ -765,6 +777,7 @@
             color: #cbd5e1;
             margin-bottom: 1rem;
             font-size: 0.85rem;
+            flex-grow: 1;
         }
         
         .product-price {
@@ -787,6 +800,7 @@
             text-transform: uppercase;
             letter-spacing: 1px;
             border: 2px solid var(--primary);
+            margin-top: auto;
         }
         
         .product-button:hover {
@@ -907,7 +921,7 @@
             font-size: 0.95rem;
         }
         
-        .form-group input, .form-group textarea {
+        .form-group input, .form-group textarea, .form-group select {
             width: 100%;
             padding: 0.7rem 1rem;
             border: 1px solid #3e3e48;
@@ -918,7 +932,7 @@
             color: var(--light);
         }
         
-        .form-group input:focus, .form-group textarea:focus {
+        .form-group input:focus, .form-group textarea:focus, .form-group select:focus {
             outline: none;
             border-color: var(--primary);
             box-shadow: 0 0 0 3px rgba(0, 168, 89, 0.1);
@@ -1156,6 +1170,28 @@
         }
         
         /* Mejoras para dispositivos móviles */
+        @media (min-width: 768px) {
+            .services-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+            
+            .about-container {
+                flex-direction: row;
+            }
+            
+            .contact-container {
+                flex-direction: row;
+            }
+            
+            .footer-container {
+                grid-template-columns: repeat(4, 1fr);
+            }
+            
+            .footer-about {
+                grid-column: span 2;
+            }
+        }
+        
         @media (max-width: 992px) {
             .hero-content {
                 flex-direction: column;
@@ -1178,14 +1214,6 @@
             
             .hero-image {
                 margin-top: 2rem;
-            }
-            
-            .about-container, .contact-container {
-                flex-direction: column;
-            }
-            
-            .about-image {
-                margin-bottom: 2rem;
             }
         }
         
@@ -1284,11 +1312,6 @@
             /* Ajustes para el carrusel en móviles pequeños */
             .carousel-item {
                 min-width: 260px;
-            }
-            
-            /* Ajustes para las tarjetas de productos */
-            .products-grid {
-                grid-template-columns: 1fr;
             }
         }
         
@@ -1394,7 +1417,52 @@
         </div>
     </section>
 
-    <!-- Sección Nosotros con efecto de tablero -->
+    <!-- Sección Servicios con estilo de cuadro de mando (AHORA PRIMERO) -->
+    <section class="services-section" id="services">
+        <div class="services-container">
+            <div class="section-title">
+                <h2>Tipos de Peritaje</h2>
+                <p>Servicios especializados de evaluación técnica vehicular</p>
+            </div>
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-image">
+                        <img src="3.jpg" alt="Peritaje por siniestro" loading="lazy">
+                    </div>
+                    <div class="service-content">
+                        <h3>Peritaje ORO</h3>
+                        <p>Escaneo del motor (detecta si el velocímetro ha sido adulterado o si se han borrado códigos de falla). Verificación de golpes mediante espesor de pintura. Revisión de la estructura del chasis (accidentes o golpes anteriores).</p>
+                        <div class="service-price">VALOR $250.000</div>
+                        <a href="#contact" class="service-button">SOLICITAR</a>
+                    </div>
+                </div>
+                <div class="service-card">
+                    <div class="service-image">
+                        <img src="4.jpg" alt="Evaluación precompra" loading="lazy">
+                    </div>
+                    <div class="service-content">
+                        <h3>PERITAJE PLATA</h3>
+                        <p>Escaneo del motor (detecta si el velocímetro ha sido adulterado o si se han borrado códigos de falla). Verificación de golpes mediante espesor de pintura. Revisión de la estructura del chasis (accidentes o golpes anteriores).</p>
+                        <div class="service-price">Desde $200.000</div>
+                        <a href="#contact" class="service-button">SOLICITAR</a>
+                    </div>
+                </div>
+                <div class="service-card">
+                    <div class="service-image">
+                        <img src="5.jpg" alt="Peritaje mecánico" loading="lazy">
+                    </div>
+                    <div class="service-content">
+                        <h3>PERITAJE BRONCE</h3>
+                        <p>Escaneo del motor (detecta si el velocímetro ha sido adulterado o si se han borrado códigos de falla). Verificación de golpes mediante espesor de pintura. Revisión de la estructura del chasis (accidentes o golpes anteriores).</p>
+                        <div class="service-price">Desde $150.000</div>
+                        <a href="#contact" class="service-button">SOLICITAR</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sección Nosotros con efecto de tablero (AHORA DESPUÉS DE SERVICIOS) -->
     <section class="about-section" id="about">
         <div class="about-container">
             <div class="about-image">
@@ -1440,51 +1508,6 @@
                             <h3>Rapidez</h3>
                             <p>Informes en 1 - 2 horas</p>
                         </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Sección Servicios con estilo de cuadro de mando -->
-    <section class="services-section" id="services">
-        <div class="services-container">
-            <div class="section-title">
-                <h2>Tipos de Peritaje</h2>
-                <p>Servicios especializados de evaluación técnica vehicular</p>
-            </div>
-            <div class="services-grid">
-                <div class="service-card">
-                    <div class="service-image">
-                        <img src="3.jpg" alt="Peritaje por siniestro" loading="lazy">
-                    </div>
-                    <div class="service-content">
-                        <h3>Peritaje ORO</h3>
-                        <p>Escaneo del motor (detecta si el velocímetro ha sido adulterado o si se han borrado códigos de falla). Verificación de golpes mediante espesor de pintura. Revisión de la estructura del chasis (accidentes o golpes anteriores).</p>
-                        <div class="service-price">VALOR $250.000</div>
-                        <a href="#contact" class="service-button">SOLICITAR</a>
-                    </div>
-                </div>
-                <div class="service-card">
-                    <div class="service-image">
-                        <img src="4.jpg" alt="Evaluación precompra" loading="lazy">
-                    </div>
-                    <div class="service-content">
-                        <h3>PERITAJE PLATA</h3>
-                        <p>Escaneo del motor (detecta si el velocímetro ha sido adulterado o si se han borrado códigos de falla). Verificación de golpes mediante espesor de pintura. Revisión de la estructura del chasis (accidentes o golpes anteriores).</p>
-                        <div class="service-price">Desde $200.000</div>
-                        <a href="#contact" class="service-button">SOLICITAR</a>
-                    </div>
-                </div>
-                <div class="service-card">
-                    <div class="service-image">
-                        <img src="5.jpg" alt="Peritaje mecánico" loading="lazy">
-                    </div>
-                    <div class="service-content">
-                        <h3>PERITAJE BRONCE</h3>
-                        <p>Escaneo del motor (detecta si el velocímetro ha sido adulterado o si se han borrado códigos de falla). Verificación de golpes mediante espesor de pintura. Revisión de la estructura del chasis (accidentes o golpes anteriores).</p>
-                        <div class="service-price">Desde $150.000</div>
-                        <a href="#contact" class="service-button">SOLICITAR</a>
                     </div>
                 </div>
             </div>
@@ -1594,7 +1617,7 @@
                 </div>
             </div>
             <div class="contact-form">
-                <form id="contactForm" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+                <form id="contactForm" action="https://formspree.io/f/mqkrbqbv" method="POST">
                     <div class="form-group">
                         <label for="name">Nombre Completo</label>
                         <input type="text" id="name" name="name" required>
@@ -1607,7 +1630,19 @@
                         <label for="phone">Teléfono</label>
                         <input type="tel" id="phone" name="phone" required>
                     </div>
-                    
+                    <div class="form-group">
+                        <label for="service">Servicio de Interés</label>
+                        <select id="service" name="service" class="form-group input" required>
+                            <option value="">Seleccione un servicio</option>
+                            <option value="Peritaje Oro">Peritaje ORO ($250.000)</option>
+                            <option value="Peritaje Plata">Peritaje PLATA ($200.000)</option>
+                            <option value="Peritaje Bronce">Peritaje BRONCE ($150.000)</option>
+                            <option value="Limpieza Interior">Limpieza Interior ($150.000)</option>
+                            <option value="Análisis de Kilometraje">Análisis de Kilometraje ($100.000)</option>
+                            <option value="Informe Ejecutivo">Informe Ejecutivo ($120.000)</option>
+                            <option value="Revisión Motor">Revisión Profunda del Motor ($110.000)</option>
+                        </select>
+                    </div>
                     <div class="form-group">
                         <label for="message">Detalles del Vehículo</label>
                         <textarea id="message" name="message" required placeholder="Marca, modelo, año y motivo de la evaluación"></textarea>
@@ -1630,10 +1665,10 @@
                 <a href="#" class="logo"><img src="logo.png" alt="Perito Expert" loading="lazy"></a>
                 <p>Expertos en peritaje automotriz con estándares profesionales y tecnología de punta para evaluaciones técnicas precisas.</p>
                 <div class="social-links">
-                    <a href="#" class="social-link" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
-                    <a href="#" class="social-link" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="https://www.facebook.com/PeritoExpert/" class="social-link" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                    <a href="https://www.instagram.com/perito.expert/" class="social-link" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
                     <a href="#" class="social-link" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
-                    <a href="#" class="social-link" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+                    <a href="https://www.youtube.com/@PeritoExpert" class="social-link" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
                 </div>
             </div>
             <div class="footer-links">
