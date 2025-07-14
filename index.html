@@ -5,21 +5,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Perito Expert - Peritaje Automotriz Profesional</title>
     <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-PKZPY26QVQ"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-PKZPY26QVQ');
-</script>
-     <link rel="icon" type="image/png" href="favicon.png">
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-PKZPY26QVQ"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-PKZPY26QVQ');
+    </script>
+    <link rel="icon" type="image/png" href="favicon.png">
     <link rel="shortcut icon" href="favicon.png" type="image/x-icon">
     <link rel="apple-touch-icon" href="favicon.png">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Racing+Sans+One&family=Exo+2:wght@300;400;500;600;700&display=swap" rel ="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Racing+Sans+One&family=Exo+2:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        
         :root {
             --primary: #00a859; /* Verde F1 */
             --secondary: #991813e8; /* Rojo F1 */
@@ -547,6 +545,102 @@
         .service-button:hover {
             background-color: var(--primary);
             color: white;
+        }
+
+        /* Estilos para el modal de descripción */
+        .service-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            z-index: 1000;
+            overflow-y: auto;
+            padding: 2rem;
+            box-sizing: border-box;
+        }
+
+        .modal-content {
+            background-color: var(--carbon);
+            max-width: 600px;
+            margin: 2rem auto;
+            padding: 2rem;
+            border: 2px solid var(--primary);
+            position: relative;
+            animation: modalFadeIn 0.3s ease-out;
+        }
+
+        @keyframes modalFadeIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            color: var(--light);
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+
+        .close-modal:hover {
+            color: var(--primary);
+        }
+
+        .modal-title {
+            color: var(--primary);
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+
+        .modal-description {
+            color: #cbd5e1;
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+            white-space: pre-line;
+        }
+
+        .modal-price {
+            color: var(--primary);
+            font-size: 1.2rem;
+            font-weight: bold;
+            margin-bottom: 1.5rem;
+        }
+
+        /* Estilos para el botón Saber Más */
+        .know-more-btn {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            background-color: transparent;
+            color: var(--secondary);
+            border: 2px solid var(--secondary);
+            border-radius: 0;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            font-size: 0.85rem;
+            margin-bottom: 1rem;
+            cursor: pointer;
+            text-transform: uppercase;
+        }
+
+        .know-more-btn:hover {
+            background-color: var(--secondary);
+            color: white;
+        }
+
+        /* Estilos para la descripción corta */
+        .short-description {
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            margin-bottom: 0.5rem;
         }
         
         /* Sección Nosotros con efecto de tablero - MOVIDA DESPUÉS DE SERVICIOS */
@@ -1406,25 +1500,12 @@
                     </div>
                     <div class="service-content">
                         <h3>Peritaje ORO</h3>
-                        <p>Escaneo del motor (detecta si el velocímetro ha sido adulterado o si se han borrado códigos de falla).
-
-Verificación de golpes mediante espesor de pintura.
-
-Revisión de la estructura del chasis (accidentes o golpes anteriores).
-
-Medición de presión del motor (para conocer la compresión de los pistones).
-
-Revisión del sistema eléctrico, batería y alternador.
-
-Revisión de la caja (mecánica o automática).
-
-Revisión del desgaste interior del vehículo.
-
-Prueba de manejo.
-
-Improntas y antecedentes.
-
-Verificación del historial de propietarios anteriores.</p>
+                        <div class="short-description">
+                            Escaneo del motor (detecta si el velocímetro ha sido adulterado o si se han borrado códigos de falla).
+                            Verificación de golpes mediante espesor de pintura.
+                            Revisión de la estructura del chasis (accidentes o golpes anteriores).
+                        </div>
+                        <button class="know-more-btn" data-service="oro">SABER MÁS</button>
                         <div class="service-price">VALOR $200.000</div>
                         <a href="#contact" class="service-button">SOLICITAR</a>
                     </div>
@@ -1435,23 +1516,12 @@ Verificación del historial de propietarios anteriores.</p>
                     </div>
                     <div class="service-content">
                         <h3>PERITAJE PLATA</h3>
-                        <p>Escaneo del motor (detecta si el velocímetro ha sido adulterado o si se han borrado códigos de falla).
-
-Verificación de golpes mediante espesor de pintura.
-
-Revisión de la estructura del chasis (accidentes o golpes anteriores).
-
-Medición de presión del motor (para conocer la compresión de los pistones).
-
-Revisión del sistema eléctrico, batería y alternador.
-
-Revisión de la caja (mecánica o automática).
-
-Revisión del desgaste interior del vehículo.
-
-Prueba de manejo.
-
-Improntas y antecedentes.</p>
+                        <div class="short-description">
+                            Escaneo del motor (detecta si el velocímetro ha sido adulterado o si se han borrado códigos de falla).
+                            Verificación de golpes mediante espesor de pintura.
+                            Revisión de la estructura del chasis (accidentes o golpes anteriores).
+                        </div>
+                        <button class="know-more-btn" data-service="plata">SABER MÁS</button>
                         <div class="service-price">Desde $160.000</div>
                         <a href="#contact" class="service-button">SOLICITAR</a>
                     </div>
@@ -1462,15 +1532,12 @@ Improntas y antecedentes.</p>
                     </div>
                     <div class="service-content">
                         <h3>PERITAJE BRONCE</h3>
-                        <p>Escaneo del motor (detecta si el velocímetro ha sido adulterado o si se han borrado códigos de falla).
-
-Verificación de golpes mediante espesor de pintura.
-
-Revisión de la estructura del chasis (accidentes o golpes anteriores).
-
-Medición de presión del motor (para conocer la compresión de los pistones).
-
-Revisión del sistema eléctrico, batería y alternador..</p>
+                        <div class="short-description">
+                            Escaneo del motor (detecta si el velocímetro ha sido adulterado o si se han borrado códigos de falla).
+                            Verificación de golpes mediante espesor de pintura.
+                            Revisión de la estructura del chasis (accidentes o golpes anteriores).
+                        </div>
+                        <button class="know-more-btn" data-service="bronce">SABER MÁS</button>
                         <div class="service-price">Desde $120.000</div>
                         <a href="#contact" class="service-button">SOLICITAR</a>
                     </div>
@@ -1478,9 +1545,6 @@ Revisión del sistema eléctrico, batería y alternador..</p>
             </div>
         </div>
     </section>
-
-   
-
 
     <!-- Sección Nosotros con efecto de tablero (AHORA DESPUÉS DE SERVICIOS) -->
     <section class="about-section" id="about">
@@ -1534,7 +1598,8 @@ Revisión del sistema eléctrico, batería y alternador..</p>
         </div>
     </section>
 
-   <section class="products-section" id="products">
+    <!-- Sección Productos con estilo de neumáticos -->
+    <section class="products-section" id="products">
         <div class="products-container">
             <div class="section-title">
                 <h2>Servicios Adicionales</h2>
@@ -1587,7 +1652,7 @@ Revisión del sistema eléctrico, batería y alternador..</p>
                 </div>
                 <div class="product-card">
                     <div class="product-image">
-                        <img src="improntas.jpeg" alt="Toma de improntas" loading="lazy">
+                        <img src="improntas.jpg" alt="Toma de improntas" loading="lazy">
                     </div>
                     <div class="product-content">
                         <h3>Toma de improntas</h3>
@@ -1603,13 +1668,13 @@ Revisión del sistema eléctrico, batería y alternador..</p>
                     <div class="product-content">
                         <h3>Polichado de vehículos</h3>
                         <p>Proceso de pulido que elimina rayones superficiales y restaura el brillo original de la pintura del vehículo.</p>
-                        <div class="product-price">$200.000</div>
+                        <div class="product-price">$50.000</div>
                         <a href="#contact" class="product-button">CONTRATAR</a>
                     </div>
                 </div>
                 <div class="product-card">
                     <div class="product-image">
-                        <img src="legal.jpg" alt="Estado legal del vehículo" loading="lazy">
+                        <img src="Legal.jpg" alt="Estado legal del vehículo" loading="lazy">
                     </div>
                     <div class="product-content">
                         <h3>Estado legal del vehículo</h3>
@@ -1720,6 +1785,17 @@ Revisión del sistema eléctrico, batería y alternador..</p>
     <a href="https://wa.me/573007152606" class="whatsapp-button" target="_blank" aria-label="Contactar por WhatsApp">
         <i class="fab fa-whatsapp"></i>
     </a>
+
+    <!-- Modal para mostrar la descripción completa del servicio -->
+    <div id="serviceModal" class="service-modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h3 class="modal-title" id="modalServiceTitle">Peritaje ORO</h3>
+            <p class="modal-description" id="modalServiceDescription"></p>
+            <div class="modal-price" id="modalServicePrice">VALOR $200.000</div>
+            <a href="#contact" class="service-button">SOLICITAR</a>
+        </div>
+    </div>
 
     <!-- Footer con estilo de escape -->
     <footer>
@@ -1970,6 +2046,184 @@ Revisión del sistema eléctrico, batería y alternador..</p>
         if (window.innerWidth > 768) {
             setInterval(createSpeedLine, 500);
         }
-    </script>
+
+        // Modal para mostrar descripción completa del servicio
+        const modal = document.getElementById('serviceModal');
+        const modalTitle = document.getElementById('modalServiceTitle');
+        const modalDesc = document.getElementById('modalServiceDescription');
+        const modalPrice = document.getElementById('modalServicePrice');
+        const closeBtn = document.querySelector('.close-modal');
+        
+        // Datos completos de cada servicio
+        const servicesData = {
+            oro: {
+                title: "Peritaje ORO",
+                description: "Escaneo del motor (detecta si el velocímetro ha sido adulterado o si se han borrado códigos de falla).\n\nVerificación de golpes mediante espesor de pintura.\n\nRevisión de la estructura del chasis (accidentes o golpes anteriores).\n\nMedición de presión del motor (para conocer la compresión de los pistones).\n\nRevisión del sistema eléctrico, batería y alternador.\n\nRevisión de la caja (mecánica o automática).\n\nRevisión del desgaste interior del vehículo.\n\nPrueba de manejo.\n\nImprontas y antecedentes.\n\nVerificación del historial de propietarios anteriores.",
+                price: "VALOR $200.000"
+            },
+            plata: {
+                title: "Peritaje PLATA",
+                description: "Escaneo del motor (detecta si el velocímetro ha sido adulterado o si se han borrado códigos de falla).\n\nVerificación de golpes mediante espesor depintura",
+                price: "VALOR $160.000"  
+            },
+            bronce: {
+                title: "Peritaje BRONCE",
+                description: "Escaneo del motor (detecta si el velocímetro ha sido adulterado o si se han borrado códigos de falla).\n\nVerificación de golpes mediante espesor depintura",
+                price: "VALOR $120.000"  
+            },
+
+        }
+<script>
+     document.addEventListener('DOMContentLoaded', function() {
+        const modal = document.getElementById('serviceModal');
+        const modalTitle = document.getElementById('modalServiceTitle');
+        const modalDesc = document.getElementById('modalServiceDescription');
+        const modalPrice = document.getElementById('modalServicePrice');
+        const closeBtn = document.querySelector('.close-modal');
+        
+        // Datos completos de cada servicio
+        const servicesData = {
+            oro: {
+                title: "Peritaje ORO",
+                description: "Escaneo del motor (detecta si el velocímetro ha sido adulterado o si se han borrado códigos de falla).\n\nVerificación de golpes mediante espesor de pintura.\n\nRevisión de la estructura del chasis (accidentes o golpes anteriores).\n\nMedición de presión del motor (para conocer la compresión de los pistones).\n\nRevisión del sistema eléctrico, batería y alternador.\n\nRevisión de la caja (mecánica o automática).\n\nRevisión del desgaste interior del vehículo.\n\nPrueba de manejo.\n\nImprontas y antecedentes.\n\nVerificación del historial de propietarios anteriores.",
+                price: "VALOR $200.000"
+            },
+            plata: {
+                title: "Peritaje PLATA",
+                description: "Escaneo del motor (detecta si el velocímetro ha sido adulterado o si se han borrado códigos de falla).\n\nVerificación de golpes mediante espesor de pintura.\n\nRevisión de la estructura del chasis (accidentes o golpes anteriores).\n\nMedición de presión del motor (para conocer la compresión de los pistones).\n\nRevisión del sistema eléctrico, batería y alternador.\n\nRevisión de la caja (mecánica o automática).\n\nRevisión del desgaste interior del vehículo.\n\nPrueba de manejo.\n\nImprontas y antecedentes.",
+                price: "VALOR $160.000"
+            },
+            bronce: {
+                title: "Peritaje BRONCE",
+                description: "Escaneo del motor (detecta si el velocímetro ha sido adulterado o si se han borrado códigos de falla).\n\nVerificación de golpes mediante espesor de pintura.\n\nRevisión de la estructura del chasis (accidentes o golpes anteriores).\n\nMedición de presión del motor (para conocer la compresión de los pistones).\n\nRevisión del sistema eléctrico, batería y alternador.",
+                price: "VALOR $120.000"
+            }
+        };
+
+        // Manejar clic en botones Saber Más
+        document.querySelectorAll('.know-more-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const serviceType = this.getAttribute('data-service');
+                const serviceData = servicesData[serviceType];
+                
+                modalTitle.textContent = serviceData.title;
+                modalDesc.textContent = serviceData.description;
+                modalPrice.textContent = serviceData.price;
+                
+                modal.style.display = 'block';
+                document.body.style.overflow = 'hidden';
+            });
+        });
+
+        // Cerrar modal
+        closeBtn.addEventListener('click', function() {
+            modal.style.display = 'none';
+            document.body.style.overflow = 'auto';
+        });
+
+        // Cerrar al hacer clic fuera del contenido
+        modal.addEventListener('click', function(e) {
+            if (e.target === modal) {
+                modal.style.display = 'none';
+                document.body.style.overflow = 'auto';
+            }
+        });
+
+        // Cerrar con tecla ESC
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape' && modal.style.display === 'block') {
+                modal.style.display = 'none';
+                document.body.style.overflow = 'auto';
+            }
+        });
+    });
+</script>
+<div id="serviceModal" class="service-modal">
+    <div class="modal-content">
+        <span class="close-modal">&times;</span>
+        <h3 class="modal-title" id="modalServiceTitle">Peritaje ORO</h3>
+        <p class="modal-description" id="modalServiceDescription">
+            Escaneo del motor (detecta si el velocímetro ha sido adulterado o si se han borrado códigos de falla).
+            Verificación de golpes mediante espesor de pintura.
+            Revisión de la estructura del chasis (accidentes o golpes anteriores).
+            Medición de presión del motor (para conocer la compresión de los pistones).
+            Revisión del sistema eléctrico, batería y alternador.
+            Revisión de la caja (mecánica o automática).
+            Revisión del desgaste interior del vehículo.
+            Prueba de manejo.
+            Improntas y antecedentes.
+            Verificación del historial de propietarios anteriores.
+        </p>
+        <div class="modal-price" id="modalServicePrice">VALOR $200.000</div>
+        <a href="#contact" class="service-button">SOLICITAR</a>
+    </div>
+</div>
+
+<script>
+    // Agrega esto al final del script existente
+    document.addEventListener('DOMContentLoaded', function() {
+        const modal = document.getElementById('serviceModal');
+        const modalTitle = document.getElementById('modalServiceTitle');
+        const modalDesc = document.getElementById('modalServiceDescription');
+        const modalPrice = document.getElementById('modalServicePrice');
+        const closeBtn = document.querySelector('.close-modal');
+        
+        // Datos completos de cada servicio
+        const servicesData = {
+            oro: {
+                title: "Peritaje ORO",
+                description: "Escaneo del motor (detecta si el velocímetro ha sido adulterado o si se han borrado códigos de falla).\n\nVerificación de golpes mediante espesor de pintura.\n\nRevisión de la estructura del chasis (accidentes o golpes anteriores).\n\nMedición de presión del motor (para conocer la compresión de los pistones).\n\nRevisión del sistema eléctrico, batería y alternador.\n\nRevisión de la caja (mecánica o automática).\n\nRevisión del desgaste interior del vehículo.\n\nPrueba de manejo.\n\nImprontas y antecedentes.\n\nVerificación del historial de propietarios anteriores.",
+                price: "VALOR $200.000"
+            },
+            plata: {
+                title: "Peritaje PLATA",
+                description: "Escaneo del motor (detecta si el velocímetro ha sido adulterado o si se han borrado códigos de falla).\n\nVerificación de golpes mediante espesor de pintura.\n\nRevisión de la estructura del chasis (accidentes o golpes anteriores).\n\nMedición de presión del motor (para conocer la compresión de los pistones).\n\nRevisión del sistema eléctrico, batería y alternador.\n\nRevisión de la caja (mecánica o automática).\n\nRevisión del desgaste interior del vehículo.\n\nPrueba de manejo.\n\nImprontas y antecedentes.",
+                price: "VALOR $160.000"
+            },
+            bronce: {
+                title: "Peritaje BRONCE",
+                description: "Escaneo del motor (detecta si el velocímetro ha sido adulterado o si se han borrado códigos de falla).\n\nVerificación de golpes mediante espesor de pintura.\n\nRevisión de la estructura del chasis (accidentes o golpes anteriores).\n\nMedición de presión del motor (para conocer la compresión de los pistones).\n\nRevisión del sistema eléctrico, batería y alternador.",
+                price: "VALOR $120.000"
+            }
+        };
+
+        // Manejar clic en botones Saber Más
+        document.querySelectorAll('.know-more-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const serviceType = this.getAttribute('data-service');
+                const serviceData = servicesData[serviceType];
+                
+                modalTitle.textContent = serviceData.title;
+                modalDesc.textContent = serviceData.description;
+                modalPrice.textContent = serviceData.price;
+                
+                modal.style.display = 'block';
+                document.body.style.overflow = 'hidden';
+            });
+        });
+
+        // Cerrar modal
+        closeBtn.addEventListener('click', function() {
+            modal.style.display = 'none';
+            document.body.style.overflow = 'auto';
+        });
+
+        // Cerrar al hacer clic fuera del contenido
+        modal.addEventListener('click', function(e) {
+            if (e.target === modal) {
+                modal.style.display = 'none';
+                document.body.style.overflow = 'auto';
+            }
+        });
+
+        // Cerrar con tecla ESC
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape' && modal.style.display === 'block') {
+                modal.style.display = 'none';
+                document.body.style.overflow = 'auto';
+            }
+        });
+    });
+</script>
 </body>
 </html>
