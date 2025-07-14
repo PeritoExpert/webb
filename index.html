@@ -1451,6 +1451,70 @@
             max-width: 100%;
             overflow-x: hidden;
         }
+        .footer-certifications {
+    grid-column: span 4;
+    margin-top: 2rem;
+    text-align: center;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    padding-top: 1.5rem;
+}
+
+.footer-certifications h3 {
+    font-size: 1.2rem;
+    margin-bottom: 1.2rem;
+    color: var(--light);
+    position: relative;
+    display: inline-block;
+    text-transform: uppercase;
+}
+
+.footer-certifications h3::after {
+    content: '';
+    position: absolute;
+    width: 50%;
+    height: 3px;
+    bottom: -6px;
+    left: 25%;
+    background: linear-gradient(to right, var(--primary), var(--secondary));
+    border-radius: 2px;
+}
+
+.certification-logos {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    align-items: center;
+    margin-top: 1rem;
+}
+
+.certification-logos img {
+    height: 40px;
+    width: auto;
+    filter: grayscale(100%) brightness(1.5);
+    transition: all 0.3s ease;
+    opacity: 0.8;
+}
+
+.certification-logos img:hover {
+    filter: grayscale(0%) brightness(1);
+    opacity: 1;
+    transform: scale(1.05);
+}
+
+@media (max-width: 768px) {
+    .certification-logos {
+        gap: 1rem;
+    }
+    
+    .certification-logos img {
+        height: 30px;
+    }
+    
+    .footer-certifications {
+        grid-column: span 1;
+    }
+}
     </style>
 </head>
 <body>
@@ -1801,6 +1865,7 @@
             <a href="#contact" class="service-button">SOLICITAR</a>
         </div>
     </div>
+    
 
     <!-- Footer con estilo de escape -->
     <footer>
@@ -1866,6 +1931,16 @@
         <div class="footer-bottom">
             <p>&copy; 2025 Perito Expert. Todos los derechos reservados. | <a href="#">Aviso de Privacidad</a></p>
         </div>
+        <div class="footer-certifications">
+    <h3>Certificaciones y Métodos de Pago</h3>
+    <div class="certification-logos">
+        <img src="camara-comercio.png" alt="Registro Cámara de Comercio" loading="lazy">
+        <img src="bancolombia.png" alt="Bancolombia" loading="lazy">
+        <img src="davivienda.png" alt="Davivienda" loading="lazy">
+        <img src="nequi.png" alt="Nequi" loading="lazy">
+        <img src="daviplata.png" alt="Daviplata" loading="lazy">
+    </div>
+</div>
     </footer>
 
     <script>
