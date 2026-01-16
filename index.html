@@ -923,6 +923,314 @@
             background-color: transparent;
             color: var(--primary);
         }
+
+        /* Sección Cómo Funciona con animaciones */
+.process-section {
+    padding: 4rem 1.5rem;
+    background: linear-gradient(135deg, rgba(21, 21, 30, 0.95) 0%, rgba(36, 36, 36, 0.9) 100%);
+    position: relative;
+    overflow: hidden;
+}
+
+.process-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url('proceso-bg.jpg') no-repeat center center/cover;
+    opacity: 0.05;
+    z-index: 0;
+}
+
+.process-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
+}
+
+.process-steps {
+    margin-top: 3rem;
+    position: relative;
+}
+
+.process-steps::before {
+    content: '';
+    position: absolute;
+    left: 30px;
+    top: 0;
+    bottom: 0;
+    width: 4px;
+    background: linear-gradient(to bottom, var(--primary), var(--secondary));
+    border-radius: 2px;
+    z-index: 1;
+    animation: linePulse 3s ease-in-out infinite;
+}
+
+@keyframes linePulse {
+    0%, 100% { opacity: 0.7; }
+    50% { opacity: 1; }
+}
+
+.process-step {
+    display: flex;
+    margin-bottom: 3rem;
+    position: relative;
+    opacity: 0;
+    transform: translateX(-50px);
+    transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.process-step.animated {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.step-number {
+    width: 60px;
+    height: 60px;
+    background: linear-gradient(135deg, var(--primary), var(--speed));
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-family: 'Racing Sans One', cursive;
+    font-size: 1.8rem;
+    margin-right: 1.5rem;
+    flex-shrink: 0;
+    position: relative;
+    z-index: 2;
+    border: 4px solid var(--dark);
+    box-shadow: 0 0 0 4px var(--primary), 0 10px 20px rgba(0, 168, 89, 0.3);
+    animation: stepPulse 2s ease-in-out infinite;
+}
+
+@keyframes stepPulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+}
+
+.step-content {
+    flex: 1;
+    background: var(--carbon);
+    border-radius: 10px;
+    padding: 1.5rem;
+    border: 2px solid rgba(0, 168, 89, 0.2);
+    transition: all 0.3s ease;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.step-content:hover {
+    border-color: var(--primary);
+    transform: translateY(-5px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+}
+
+.step-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.step-header h3 {
+    font-size: 1.3rem;
+    color: var(--light);
+    margin: 0;
+    text-transform: uppercase;
+}
+
+.step-icon {
+    font-size: 1.8rem;
+    color: var(--primary);
+    background: rgba(0, 168, 89, 0.1);
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.step-content p {
+    color: #cbd5e1;
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+}
+
+.step-image {
+    width: 100%;
+    height: 200px;
+    border-radius: 8px;
+    overflow: hidden;
+    margin-top: 1rem;
+    border: 2px solid var(--dark);
+}
+
+.step-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: all 0.5s ease;
+}
+
+.step-content:hover .step-image img {
+    transform: scale(1.05);
+}
+
+.step-result {
+    display: flex;
+    gap: 1.5rem;
+    margin-top: 1rem;
+    flex-wrap: wrap;
+}
+
+.result-option {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.result-option.approved {
+    background: rgba(0, 168, 89, 0.1);
+    color: var(--primary);
+    border: 2px solid var(--primary);
+}
+
+.result-option.rejected {
+    background: rgba(153, 24, 19, 0.1);
+    color: var(--secondary);
+    border: 2px solid var(--secondary);
+}
+
+.result-option i {
+    font-size: 1.2rem;
+}
+
+.process-cta {
+    text-align: center;
+    margin-top: 4rem;
+    padding: 2rem;
+    background: linear-gradient(135deg, rgba(0, 168, 89, 0.1), rgba(153, 24, 19, 0.1));
+    border-radius: 10px;
+    border: 2px solid rgba(0, 168, 89, 0.3);
+    position: relative;
+    overflow: hidden;
+}
+
+.process-cta::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+    transition: all 0.5s ease;
+}
+
+.process-cta:hover::before {
+    left: 100%;
+}
+
+.process-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.8rem;
+    font-size: 1.2rem;
+    padding: 1rem 2.5rem;
+    background: linear-gradient(to right, var(--primary), var(--speed));
+    animation: buttonGlow 2s ease-in-out infinite alternate;
+}
+
+@keyframes buttonGlow {
+    from { box-shadow: 0 0 10px rgba(0, 168, 89, 0.5); }
+    to { box-shadow: 0 0 20px rgba(0, 168, 89, 0.8), 0 0 30px rgba(0, 168, 89, 0.4); }
+}
+
+.cta-subtext {
+    color: #94a3b8;
+    margin-top: 1rem;
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.cta-subtext::before,
+.cta-subtext::after {
+    content: '•';
+    color: var(--primary);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .process-steps::before {
+        left: 25px;
+    }
+    
+    .step-number {
+        width: 50px;
+        height: 50px;
+        font-size: 1.5rem;
+        margin-right: 1rem;
+    }
+    
+    .step-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.5rem;
+    }
+    
+    .step-icon {
+        align-self: flex-end;
+        margin-top: -2rem;
+    }
+    
+    .step-header h3 {
+        font-size: 1.1rem;
+    }
+    
+    .step-image {
+        height: 150px;
+    }
+    
+    .process-button {
+        font-size: 1rem;
+        padding: 0.8rem 1.8rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .process-step {
+        flex-direction: column;
+    }
+    
+    .step-number {
+        align-self: flex-start;
+        margin-bottom: 1rem;
+    }
+    
+    .process-steps::before {
+        left: 25px;
+        top: 30px;
+        bottom: 30px;
+    }
+    
+    .step-result {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+}
         
         /* Sección Contacto con estilo de garaje */
         .contact-section {
@@ -1557,6 +1865,9 @@
             <div class="hero-image">
                 <img src="1.jpg" alt="Peritaje automotriz" loading="lazy">
             </div>
+            <a href="#process" class="cta-button secondary" style="margin-left: 1rem; background: transparent; border-color: var(--secondary);">
+    <i class="fas fa-play"></i> VER PROCESO
+</a>
             
         </div>
     </section>
@@ -1675,6 +1986,165 @@
     </div>
 </section>
 
+
+<!-- Sección Cómo Funciona con estilo de checklist animado -->
+<section class="process-section" id="process">
+    <div class="process-container">
+        <div class="section-title">
+            <h2>🚗 ¿Cómo funciona nuestro peritaje?</h2>
+            <p>Un proceso profesional paso a paso para tu tranquilidad</p>
+        </div>
+        
+        <div class="process-steps">
+            <!-- Paso 1 -->
+            <div class="process-step">
+                <div class="step-number">1</div>
+                <div class="step-content">
+                    <div class="step-header">
+                        <h3>Agendamiento del servicio</h3>
+                        <i class="fas fa-calendar-check step-icon"></i>
+                    </div>
+                    <p>Nos contactas y coordinamos fecha, hora y lugar según tu disponibilidad. Servicio a domicilio.</p>
+                    
+                </div>
+            </div>
+            
+            <!-- Paso 2 -->
+            <div class="process-step">
+                <div class="step-number">2</div>
+                <div class="step-content">
+                    <div class="step-header">
+                        <h3>Llegada del perito especializado</h3>
+                        <i class="fas fa-user-tie step-icon"></i>
+                    </div>
+                    <p>Un perito certificado se desplaza al punto acordado con escáner, gato hidráulico y herramientas profesionales.</p>
+                    
+                </div>
+            </div>
+            
+            <!-- Paso 3 -->
+            <div class="process-step">
+                <div class="step-number">3</div>
+                <div class="step-content">
+                    <div class="step-header">
+                        <h3>Registro del vehículo</h3>
+                        <i class="fas fa-camera step-icon"></i>
+                    </div>
+                    <p>Tomamos datos completos del vehículo y realizamos registro fotográfico exterior, interior y del motor.</p>
+                    
+                </div>
+            </div>
+            
+            <!-- Paso 4 -->
+            <div class="process-step">
+                <div class="step-number">4</div>
+                <div class="step-content">
+                    <div class="step-header">
+                        <h3>Verificación de documentación</h3>
+                        <i class="fas fa-file-alt step-icon"></i>
+                    </div>
+                    <p>Revisamos SOAT, tarjeta de propiedad, técnico-mecánica y reportes relevantes.</p>
+                    
+                </div>
+            </div>
+            
+            <!-- Paso 5 -->
+            <div class="process-step">
+                <div class="step-number">5</div>
+                <div class="step-content">
+                    <div class="step-header">
+                        <h3>Inspección visual y estructural</h3>
+                        <i class="fas fa-car-crash step-icon"></i>
+                    </div>
+                    <p>Evaluamos carrocería, chasis y alineaciones para detectar golpes, reparaciones o daños ocultos.</p>
+                   
+                </div>
+            </div>
+            
+            <!-- Paso 6 -->
+            <div class="process-step">
+                <div class="step-number">6</div>
+                <div class="step-content">
+                    <div class="step-header">
+                        <h3>Diagnóstico del motor</h3>
+                        <i class="fas fa-tachometer-alt step-icon"></i>
+                    </div>
+                    <p>Escaneo electrónico, revisión mecánica y comprobación del sistema eléctrico.</p>
+                    
+                </div>
+            </div>
+            
+            <!-- Paso 7 -->
+            <div class="process-step">
+                <div class="step-number">7</div>
+                <div class="step-content">
+                    <div class="step-header">
+                        <h3>Revisión de componentes mecánicos</h3>
+                        <i class="fas fa-cogs step-icon"></i>
+                    </div>
+                    <p>Inspección de fugas de fluidos, suspensión, frenos, tren delantero y llantas.</p>
+                    
+                </div>
+            </div>
+            
+            <!-- Paso 8 -->
+            <div class="process-step">
+                <div class="step-number">8</div>
+                <div class="step-content">
+                    <div class="step-header">
+                        <h3>Inspección del interior</h3>
+                        <i class="fas fa-chair step-icon"></i>
+                    </div>
+                    <p>Evaluamos estado interno, seguridad y accesorios adicionales.</p>
+                    
+                </div>
+            </div>
+            
+            <!-- Paso 9 -->
+            <div class="process-step">
+                <div class="step-number">9</div>
+                <div class="step-content">
+                    <div class="step-header">
+                        <h3>Prueba de ruta</h3>
+                        <i class="fas fa-road step-icon"></i>
+                    </div>
+                    <p>Probamos el vehículo en movimiento para evaluar frenado, aceleración, vibraciones y desempeño.</p>
+                    
+                </div>
+            </div>
+            
+            <!-- Paso 10 -->
+            <div class="process-step">
+                <div class="step-number">10</div>
+                <div class="step-content">
+                    <div class="step-header">
+                        <h3>Informe final y resultado</h3>
+                        <i class="fas fa-clipboard-check step-icon"></i>
+                    </div>
+                    <p>Entregamos un informe detallado con puntaje por sistema y concepto profesional.</p>
+                    <div class="step-result">
+                        <div class="result-option approved">
+                            <i class="fas fa-check-circle"></i>
+                            <span>✅ Aprobado</span>
+                        </div>
+                        <div class="result-option rejected">
+                            <i class="fas fa-times-circle"></i>
+                            <span>❌ No aprobado</span>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+        
+        <div class="process-cta">
+            <a href="#contact" class="cta-button process-button">
+                <i class="fas fa-play-circle"></i> AGENDAR MI PERITAJE
+            </a>
+            <p class="cta-subtext">Proceso completo en 1-2 horas • Informe inmediato • Resultado transparente</p>
+        </div>
+    </div>
+</section>
    
     <!-- Sección Productos con estilo de neumáticos -->
     <section class="products-section" id="products">
@@ -2350,17 +2820,41 @@
             }
         });
     });
+    // Animación para los pasos del proceso
+function animateProcessSteps() {
+    const steps = document.querySelectorAll('.process-step');
+    
+    steps.forEach((step, index) => {
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    setTimeout(() => {
+                        step.classList.add('animated');
+                    }, index * 200); // Retraso escalonado
+                    observer.unobserve(step);
+                }
+            });
+        }, {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        });
+        
+        observer.observe(step);
+    });
+}
+
+// Inicializar animaciones cuando el DOM esté listo
+document.addEventListener('DOMContentLoaded', function() {
+    animateProcessSteps();
+});
+
+// También para cuando se haga scroll
+window.addEventListener('scroll', function() {
+    if (!window.processStepsAnimated) {
+        animateProcessSteps();
+        window.processStepsAnimated = true;
+    }
+});
 </script>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
