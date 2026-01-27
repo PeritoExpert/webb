@@ -652,7 +652,7 @@
             margin-bottom: 0.5rem;
         }
         
-        /* Sección Nosotros con efecto de tablero - MOVIDA DESPUÉS DE SERVICIOS */
+        /* Sección Nosotros con efecto de tablero */
         .about-section {
             padding: 4rem 1.5rem;
             background: url('2.jpg') no-repeat center center/cover;
@@ -924,7 +924,7 @@
             color: var(--primary);
         }
 
-        /* Sección Cómo Funciona con animaciones */
+        /* Sección Cómo Funciona con animaciones - CORREGIDO */
 .process-section {
     padding: 4rem 1.5rem;
     background: linear-gradient(135deg, rgba(21, 21, 30, 0.95) 0%, rgba(36, 36, 36, 0.9) 100%);
@@ -1172,7 +1172,7 @@
     color: var(--primary);
 }
 
-/* Responsive */
+/* Responsive para proceso */
 @media (max-width: 768px) {
     .process-steps::before {
         left: 25px;
@@ -1405,12 +1405,381 @@
             transform: translateY(-3px);
             box-shadow: 0 5px 15px rgba(0, 168, 89, 0.4);
         }
+
+        /* Sección de Testimonios */
+.testimonials-section {
+    padding: 4rem 1.5rem;
+    background: linear-gradient(135deg, rgba(0, 111, 98, 0.1) 0%, rgba(21, 21, 30, 0.95) 100%);
+    position: relative;
+    overflow: hidden;
+}
+
+.testimonials-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url('proceso-bg.jpg') no-repeat center center/cover;
+    opacity: 0.03;
+    z-index: 0;
+}
+
+.testimonials-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+    max-width: 1200px;
+    margin: 3rem auto 0;
+}
+
+.testimonial-card {
+    background: var(--carbon);
+    border-radius: 10px;
+    padding: 1.5rem;
+    border: 2px solid rgba(0, 168, 89, 0.2);
+    transition: all 0.3s ease;
+    position: relative;
+    z-index: 1;
+}
+
+.testimonial-card:hover {
+    border-color: var(--primary);
+    transform: translateY(-5px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+}
+
+.testimonial-card::before {
+    content: '"';
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    font-size: 4rem;
+    color: rgba(0, 168, 89, 0.1);
+    font-family: serif;
+    z-index: -1;
+}
+
+.testimonial-rating {
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+    margin-bottom: 1rem;
+    color: var(--accent);
+}
+
+.testimonial-rating span {
+    margin-left: 0.5rem;
+    color: var(--light);
+    font-weight: 600;
+}
+
+.testimonial-text {
+    color: #cbd5e1;
+    font-style: italic;
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+    font-size: 0.95rem;
+}
+
+.testimonial-client {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    padding-top: 1rem;
+}
+
+.client-avatar {
+    width: 50px;
+    height: 50px;
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 1.2rem;
+}
+
+.client-info h4 {
+    color: var(--light);
+    font-size: 1rem;
+    margin-bottom: 0.2rem;
+}
+
+.client-info p {
+    color: #94a3b8;
+    font-size: 0.85rem;
+}
+
+/* Estadísticas */
+.stats-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+    max-width: 800px;
+    margin: 4rem auto 0;
+    padding: 2rem;
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 10px;
+    border: 2px solid rgba(0, 168, 89, 0.2);
+}
+
+.stat-item {
+    text-align: center;
+    padding: 1rem;
+}
+
+.stat-item h3 {
+    font-size: 2.5rem;
+    color: var(--primary);
+    margin-bottom: 0.5rem;
+    font-family: 'Racing Sans One', cursive;
+    text-shadow: 0 0 10px rgba(0, 168, 89, 0.3);
+}
+
+.stat-item p {
+    color: #94a3b8;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* Calculadora de Costos */
+.calculator-section {
+    padding: 4rem 1.5rem;
+    background: linear-gradient(135deg, rgba(21, 21, 30, 0.95) 0%, rgba(36, 36, 36, 0.9) 100%);
+}
+
+.calculator {
+    max-width: 1200px;
+    margin: 3rem auto 0;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    background: var(--carbon);
+    border-radius: 10px;
+    overflow: hidden;
+    border: 2px solid var(--primary);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+}
+
+.calculator-form {
+    padding: 2rem;
+    border-right: 2px solid rgba(0, 168, 89, 0.1);
+}
+
+.calculator-info {
+    padding: 2rem;
+    background: rgba(0, 0, 0, 0.2);
+}
+
+.calc-group {
+    margin-bottom: 1.5rem;
+}
+
+.calc-group label {
+    display: block;
+    color: var(--light);
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+    font-size: 0.95rem;
+}
+
+.calc-select {
+    width: 100%;
+    padding: 0.8rem 1rem;
+    background: var(--dark);
+    border: 2px solid #3e3e48;
+    border-radius: 5px;
+    color: var(--light);
+    font-size: 1rem;
+    transition: all 0.3s ease;
+}
+
+.calc-select:focus {
+    outline: none;
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(0, 168, 89, 0.1);
+}
+
+.checkbox-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+    margin-top: 0.5rem;
+}
+
+.checkbox-label {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    cursor: pointer;
+    padding: 0.8rem;
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 5px;
+    border: 1px solid transparent;
+    transition: all 0.3s ease;
+}
+
+.checkbox-label:hover {
+    border-color: var(--primary);
+    background: rgba(0, 168, 89, 0.05);
+}
+
+.checkbox-label input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+    accent-color: var(--primary);
+}
+
+.checkbox-label span {
+    color: var(--light);
+    font-size: 0.9rem;
+}
+
+.calc-result {
+    margin: 2rem 0;
+    padding: 1.5rem;
+    background: rgba(0, 168, 89, 0.1);
+    border-radius: 10px;
+    border: 2px solid var(--primary);
+}
+
+.result-label {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.5rem;
+}
+
+.result-label span {
+    color: var(--light);
+    font-weight: 600;
+    font-size: 1.1rem;
+}
+
+.result-label small {
+    color: #94a3b8;
+    font-size: 0.8rem;
+}
+
+.result-price {
+    text-align: center;
+    margin-top: 1rem;
+}
+
+.result-price span {
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: var(--primary);
+    font-family: 'Racing Sans One', cursive;
+    text-shadow: 0 0 10px rgba(0, 168, 89, 0.3);
+}
+
+.calc-actions {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+}
+
+.calc-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.8rem;
+    padding: 1rem;
+    background: linear-gradient(to right, var(--primary), var(--speed));
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-weight: 600;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.calc-button.secondary {
+    background: transparent;
+    border: 2px solid var(--secondary);
+    color: var(--secondary);
+}
+
+.calc-button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(0, 168, 89, 0.3);
+}
+
+.calc-button.secondary:hover {
+    background: var(--secondary);
+    color: white;
+}
+
+/* Info section */
+.calculator-info h3 {
+    color: var(--light);
+    margin-bottom: 1.5rem;
+    font-size: 1.3rem;
+}
+
+.calc-features {
+    list-style: none;
+    margin-bottom: 2rem;
+}
+
+.calc-features li {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.8rem;
+    margin-bottom: 1rem;
+    color: #cbd5e1;
+}
+
+.calc-features li i {
+    color: var(--primary);
+    margin-top: 0.2rem;
+    flex-shrink: 0;
+}
+
+.calc-tip {
+    background: rgba(255, 215, 0, 0.1);
+    border-left: 4px solid var(--accent);
+    padding: 1rem;
+    border-radius: 5px;
+    display: flex;
+    gap: 1rem;
+}
+
+.calc-tip i {
+    color: var(--accent);
+    font-size: 1.5rem;
+    flex-shrink: 0;
+}
+
+.calc-tip p {
+    color: #e2e8f0;
+    font-size: 0.9rem;
+    margin: 0;
+}
+
+.calc-tip strong {
+    color: var(--accent);
+}
         
         /* WhatsApp Button con efecto de neón */
-        .whatsapp-button {
+        .whatsapp-float {
             position: fixed;
             bottom: 1.5rem;
             right: 1.5rem;
+            z-index: 9999;
+        }
+
+        .whatsapp-button {
             width: 60px;
             height: 60px;
             background-color: #25D366;
@@ -1420,31 +1789,76 @@
             justify-content: center;
             color: white;
             font-size: 1.8rem;
-            box-shadow: 0 4px 15px rgba(37, 211, 102, 0.5);
-            z-index: 999;
+            box-shadow: 0 4px 20px rgba(37, 211, 102, 0.5);
             transition: all 0.3s ease;
-            animation: pulse 2s infinite, neonWhatsapp 1.5s ease-in-out infinite alternate;
+            animation: pulse 2s infinite;
             border: 2px solid white;
+            text-decoration: none;
+            position: relative;
+            z-index: 100;
         }
-        
+
+        .whatsapp-options {
+            position: absolute;
+            bottom: 70px;
+            right: 0;
+            background: var(--carbon);
+            border-radius: 10px;
+            padding: 0.5rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            border: 2px solid var(--primary);
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(20px);
+            transition: all 0.3s ease;
+            min-width: 200px;
+        }
+
+        .whatsapp-float:hover .whatsapp-options {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .wa-option {
+            display: flex;
+            flex-direction: column;
+            padding: 0.8rem 1rem;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 5px;
+            margin-bottom: 0.5rem;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border: 1px solid transparent;
+        }
+
+        .wa-option:last-child {
+            margin-bottom: 0;
+        }
+
+        .wa-option:hover {
+            background: rgba(0, 168, 89, 0.1);
+            border-color: var(--primary);
+            transform: translateX(-5px);
+        }
+
+        .wa-option span {
+            color: var(--light);
+            font-weight: 600;
+            font-size: 0.9rem;
+            margin-bottom: 0.2rem;
+        }
+
+        .wa-option small {
+            color: var(--primary);
+            font-size: 0.8rem;
+            font-weight: 700;
+        }
+
         @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.1); }
-            100% { transform: scale(1); }
-        }
-        
-        @keyframes neonWhatsapp {
-            from {
-                box-shadow: 0 0 5px #25D366, 0 0 10px #25D366, 0 0 15px #25D366, 0 0 20px #25D366;
-            }
-            to {
-                box-shadow: 0 0 10px #25D366, 0 0 20px #25D366, 0 0 30px #25D366, 0 0 40px #25D366;
-            }
-        }
-        
-        .whatsapp-button:hover {
-            transform: scale(1.1);
-            background-color: #128C7E;
+            0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7); }
+            70% { transform: scale(1.05); box-shadow: 0 0 0 10px rgba(37, 211, 102, 0); }
+            100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); }
         }
         
         /* Footer con estilo de escape */
@@ -1593,6 +2007,55 @@
             100% { transform: translateX(100%); opacity: 0; }
         }
         
+        /* Footer certifications */
+        .footer-certifications {
+            grid-column: span 4;
+            margin-top: 2rem;
+            text-align: center;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 1.5rem;
+        }
+
+        .footer-certifications h3 {
+            font-size: 1.2rem;
+            margin-bottom: 1.2rem;
+            color: var(--light);
+            position: relative;
+            display: inline-block;
+            text-transform: uppercase;
+        }
+
+        .footer-certifications h3::after {
+            content: '';
+            position: absolute;
+            width: 50%;
+            height: 3px;
+            bottom: -6px;
+            left: 25%;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            border-radius: 2px;
+        }
+
+        .certification-logos {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+            align-items: center;
+            margin-top: 1rem;
+        }
+
+        .certification-logos img {
+            height: 40px;
+            width: auto;
+            transition: all 0.01s ease;
+        }
+
+        .certification-logos img:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+
         /* Mejoras para dispositivos móviles */
         @media (min-width: 768px) {
             .services-grid {
@@ -1613,6 +2076,22 @@
             
             .footer-about {
                 grid-column: span 2;
+            }
+
+            .testimonials-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+            
+            .stats-container {
+                grid-template-columns: repeat(4, 1fr);
+            }
+
+            .calculator {
+                grid-template-columns: 1fr 1fr;
+            }
+            
+            .calc-actions {
+                grid-template-columns: 1fr 1fr;
             }
         }
         
@@ -1700,6 +2179,43 @@
             .form-group input, .form-group textarea {
                 padding: 0.7rem;
             }
+
+            .calculator-form {
+                border-right: none;
+                border-bottom: 2px solid rgba(0, 168, 89, 0.1);
+            }
+
+            .certification-logos {
+                gap: 1rem;
+            }
+            
+            .certification-logos img {
+                height: 30px;
+            }
+            
+            .footer-certifications {
+                grid-column: span 1;
+            }
+
+            .whatsapp-float {
+                bottom: 1rem;
+                right: 1rem;
+            }
+            
+            .whatsapp-button {
+                width: 55px;
+                height: 55px;
+                font-size: 1.5rem;
+            }
+            
+            .whatsapp-options {
+                min-width: 180px;
+                right: -50px;
+            }
+
+            .stat-item h3 {
+                font-size: 2rem;
+            }
         }
         
         @media (max-width: 576px) {
@@ -1723,14 +2239,6 @@
             
             .about-text h2, .contact-info h2 {
                 font-size: 1.6rem;
-            }
-            
-            .whatsapp-button {
-                width: 55px;
-                height: 55px;
-                font-size: 1.6rem;
-                bottom: 1rem;
-                right: 1rem;
             }
             
             /* Ajustes para el carrusel en móviles pequeños */
@@ -1768,70 +2276,6 @@
             max-width: 100%;
             overflow-x: hidden;
         }
-        footer-certifications {
-    grid-column: span 4;
-    margin-top: 2rem;
-    text-align: center;
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
-    padding-top: 1.5rem;
-}
-
-.footer-certifications h3 {
-    font-size: 1.2rem;
-    margin-bottom: 1.2rem;
-    color: var(--light);
-    position: relative;
-    display: inline-block;
-    text-transform: uppercase;
-}
-
-.footer-certifications h3::after {
-    content: '';
-    position: absolute;
-    width: 50%;
-    height: 3px;
-    bottom: -6px;
-    left: 25%;
-    background: linear-gradient(to right, var(--primary), var(--secondary));
-    border-radius: 2px;
-}
-
-.certification-logos {
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    gap: 1.5rem;
-    align-items: center;
-    margin-top: 1rem;
-}
-
-.certification-logos img {
-    height: 40px;
-    width: auto;
-    transition: all 0.01s ease;
-}
-
-.certification-logos img:hover {
-    transform: scale(1.05);
-}
-
-@media (max-width: 768px) {
-    .certification-logos {
-        gap: 1rem;
-    }
-    
-    .certification-logos img {
-        height: 30px;
-    }
-    
-    .footer-certifications {
-        grid-column: span 1;
-    }
-}
-.certification-logos img:hover {
-    transform: scale(1.05);
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-}
     </style>
 </head>
 <body>
@@ -1846,7 +2290,10 @@
                 <li><a href="#home">Inicio</a></li>
                 <li><a href="#about">Nosotros</a></li>
                 <li><a href="#services">Peritajes</a></li>
+                <li><a href="#process">Proceso</a></li>
                 <li><a href="#products">Servicios</a></li>
+                <li><a href="#testimonials">Testimonios</a></li>
+                <li><a href="#calculator">Calculadora</a></li>
                 <li><a href="#contact">Contacto</a></li>
             </ul>
         </nav>
@@ -1860,111 +2307,121 @@
                 <h3>SERVICIO A <span>DOMICILIO EN BOGOTÁ</span> Y MUNICIPIOS ALEDAÑOS</h3>
                 <p>Servicios profesionales de Peritaje antes de comprar o vender</p>
                 <a href="#contact" class="cta-button">SOLICITAR PERITAJE</a>
-                
+                <a href="#process" class="cta-button secondary" style="margin-left: 1rem; background: transparent; border-color: var(--secondary);">
+                    <i class="fas fa-play"></i> VER PROCESO
+                </a>
             </div>
             <div class="hero-image">
                 <img src="1.jpg" alt="Peritaje automotriz" loading="lazy">
             </div>
-            <a href="#process" class="cta-button secondary" style="margin-left: 1rem; background: transparent; border-color: var(--secondary);">
-    <i class="fas fa-play"></i> VER PROCESO
-</a>
-            
         </div>
     </section>
 
-    
-   <!-- Sección Servicios con estilo de cuadro de mando (AHORA PRIMERO) -->
-<section class="services-section" id="services">
-    <div class="services-container">
-        <div class="section-title">
-            <h2>Tipos de Peritaje</h2>
-            <p>Servicios especializados de evaluación técnica vehicular</p>
-        </div>
-        <div class="services-grid">
-
-            <div class="service-card">
-                <div class="service-image">
-                    <img src="5.jpg" alt="Peritaje mecánico" loading="lazy">
-                </div>
-                <div class="service-content">
-                    <h3>PERITAJE BRONCE</h3>
-                    <div class="short-description">
-                        Escaneo del motor (detecta si el velocímetro ha sido adulterado o si se han borrado códigos de falla).
-                        revisión de bateria y alternador
-                        Revisión de la estructura del chasis (accidentes o golpes anteriores).
-                    </div>
-                    <button class="know-more-btn" data-service="bronce">SABER MÁS</button>
-                    <div class="service-price">Automovil $140.000</div>
-                    <div class="service-price">Camioneta $180.000</div>
-                    <a href="https://wa.me/573007152606?text=¡Hola!%20Estoy%20interesado%20en%20el%20PERITAJE%20BRONCE%20para%20mi%20vehículo." 
-                       class="service-button" target="_blank">SOLICITAR</a>
-                </div>
+    <!-- Sección Servicios -->
+    <section class="services-section" id="services">
+        <div class="services-container">
+            <div class="section-title">
+                <h2>Tipos de Peritaje</h2>
+                <p>Servicios especializados de evaluación técnica vehicular</p>
             </div>
-
-            <div class="service-card">
-                <div class="service-image">
-                    <img src="4.jpg" alt="Evaluación precompra" loading="lazy">
-                </div>
-                <div class="service-content">
-                    <h3>PERITAJE PLATA</h3>
-                    <div class="short-description">
-                        revisión de bateria y alternador
-                        Verificación de golpes mediante espesor de pintura.
-                        Revisión de la estructura del chasis (accidentes o golpes anteriores).
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-image">
+                        <img src="5.jpg" alt="Peritaje mecánico" loading="lazy">
                     </div>
-                    <button class="know-more-btn" data-service="plata">SABER MÁS</button>
-                    <div class="service-price">Automovil $180.000</div>
-                    <div class="service-price">Camioneta $220.000</div>
-                    <a href="https://wa.me/573007152606?text=¡Hola!%20Estoy%20interesado%20en%20el%20PERITAJE%20PLATA%20para%20mi%20vehículo." 
-                       class="service-button" target="_blank">SOLICITAR</a>
+                    <div class="service-content">
+                        <h3>PERITAJE BRONCE</h3>
+                        <div class="short-description">
+                            Escaneo del motor (detecta si el velocímetro ha sido adulterado o si se han borrado códigos de falla).
+                            revisión de bateria y alternador
+                            Revisión de la estructura del chasis (accidentes o golpes anteriores).
+                        </div>
+                        <button class="know-more-btn" data-service="bronce">SABER MÁS</button>
+                        <div class="service-price">Automovil $140.000</div>
+                        <div class="service-price">Camioneta $180.000</div>
+                        <a href="https://wa.me/573007152606?text=¡Hola!%20Estoy%20interesado%20en%20el%20PERITAJE%20BRONCE%20para%20mi%20vehículo." 
+                           class="service-button" target="_blank">SOLICITAR</a>
+                    </div>
                 </div>
+
+                <div class="service-card">
+                    <div class="service-image">
+                        <img src="4.jpg" alt="Evaluación precompra" loading="lazy">
+                    </div>
+                    <div class="service-content">
+                        <h3>PERITAJE PLATA</h3>
+                        <div class="short-description">
+                            revisión de bateria y alternador
+                            Verificación de golpes mediante espesor de pintura.
+                            Revisión de la estructura del chasis (accidentes o golpes anteriores).
+                        </div>
+                        <button class="know-more-btn" data-service="plata">SABER MÁS</button>
+                        <div class="service-price">Automovil $180.000</div>
+                        <div class="service-price">Camioneta $220.000</div>
+                        <a href="https://wa.me/573007152606?text=¡Hola!%20Estoy%20interesado%20en%20el%20PERITAJE%20PLATA%20para%20mi%20vehículo." 
+                           class="service-button" target="_blank">SOLICITAR</a>
+                    </div>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-image">
+                        <img src="3.jpg" alt="Peritaje por siniestro" loading="lazy">
+                    </div>
+                    <div class="service-content">
+                        <h3>Peritaje ORO</h3>
+                        <div class="short-description">
+                            Escaneo del motor (detecta si el velocímetro ha sido adulterado o si se han borrado códigos de falla).
+                            Verificación de golpes mediante espesor de pintura.
+                            Revisión de la estructura del chasis (accidentes o golpes anteriores).
+                        </div>
+                        <button class="know-more-btn" data-service="oro">SABER MÁS</button>
+                        <div class="service-price">Automovil $240.000</div>
+                        <div class="service-price">Camioneta $280.000</div>
+                        <a href="https://wa.me/573007152606?text=¡Hola!%20Estoy%20interesado%20en%20el%20PERITAJE%20ORO%20para%20mi%20vehículo." 
+                           class="service-button" target="_blank">SOLICITAR</a>
+                    </div>
+                </div>   
+                 <div class="service-card">
+                    <div class="service-image">
+                        <img src="VANSE.jpg" alt="Peritaje por siniestro" loading="lazy">
+                    </div>
+                    <div class="service-content">
+                        <h3>Peritaje Mini Vans</h3>
+                        <div class="short-description">
+                            Escaneo del motor (detecta si el velocímetro ha sido adulterado o si se han borrado códigos de falla).
+                            Verificación de golpes mediante espesor de pintura.
+                            Revisión de la estructura del chasis (accidentes o golpes anteriores).
+                        </div>
+                        <button class="know-more-btn" data-service="van">SABER MÁS</button>
+                        <div class="service-price">Mini Vans $400.000</div>
+                        <div class="service-price">URBAN $450.000</div>
+                        <a href="https://wa.me/573007152606?text=¡Hola!%20Estoy%20interesado%20en%20el%20PERITAJE%20VAN%20para%20mi%20vehículo." 
+                           class="service-button" target="_blank">SOLICITAR</a>
+                    </div>
+                </div>    
+                <div class="service-card">
+                    <div class="service-image">
+                        <img src="electrica.jpeg" alt="Peritaje por siniestro" loading="lazy">
+                    </div>
+                    <div class="service-content">
+                        <h3>Peritaje Automáticos e Híbridos</h3>
+                        <div class="short-description">
+                            Escaneo del motor (detecta si el velocímetro ha sido adulterado o si se han borrado códigos de falla).
+                            Verificación de golpes mediante espesor de pintura.
+                            Revisión de la estructura del chasis (accidentes o golpes anteriores).
+                        </div>
+                        <button class="know-more-btn" data-service="hibrido">SABER MÁS</button>
+                        <div class="service-price">Automovil $260.000</div>
+                        <div class="service-price">Camioneta $300.000</div>
+                        <a href="https://wa.me/573007152606?text=¡Hola!%20Estoy%20interesado%20en%20el%20PERITAJE%20HIBRIDO%20para%20mi%20vehículo." 
+                           class="service-button" target="_blank">SOLICITAR</a>
+                    </div>
+                </div>    
             </div>
-
-            <div class="service-card">
-                <div class="service-image">
-                    <img src="3.jpg" alt="Peritaje por siniestro" loading="lazy">
-                </div>
-                <div class="service-content">
-                    <h3>Peritaje ORO</h3>
-                    <div class="short-description">
-                        Escaneo del motor (detecta si el velocímetro ha sido adulterado o si se han borrado códigos de falla).
-                        Verificación de golpes mediante espesor de pintura.
-                        Revisión de la estructura del chasis (accidentes o golpes anteriores).
-                    </div>
-                    <button class="know-more-btn" data-service="oro">SABER MÁS</button>
-                    <div class="service-price">Automovil $240.000</div>
-                    <div class="service-price">Camioneta $280.000</div>
-                    <a href="https://wa.me/573007152606?text=¡Hola!%20Estoy%20interesado%20en%20el%20PERITAJE%20ORO%20para%20mi%20vehículo." 
-                       class="service-button" target="_blank">SOLICITAR</a>
-                </div>
-            </div>   
-             <div class="service-card">
-                <div class="service-image">
-                    <img src="VANSE.jpg" alt="Peritaje por siniestro" loading="lazy">
-                </div>
-                <div class="service-content">
-                    <h3>Peritaje Mini Vans</h3>
-                    <div class="short-description">
-                        Escaneo del motor (detecta si el velocímetro ha sido adulterado o si se han borrado códigos de falla).
-                        Verificación de golpes mediante espesor de pintura.
-                        Revisión de la estructura del chasis (accidentes o golpes anteriores).
-                    </div>
-                    <button class="know-more-btn" data-service="oro">SABER MÁS</button>
-                    <div class="service-price">Mini Vans $400.000</div>
-                    <div class="service-price">URBAN $450.000</div>
-                    <a href="https://wa.me/573007152606?text=¡Hola!%20Estoy%20interesado%20en%20el%20PERITAJE%20ORO%20para%20mi%20vehículo." 
-                       class="service-button" target="_blank">SOLICITAR</a>
-                </div>
-            </div>    
         </div>
-    </div>
-</section>
-
-  
-           
         
         <!-- Frase destacada -->
-        <div style="margin-top: 3rem; text-align: center; padding: 1.5rem; background: rgba(0, 168, 89, 0.1); border-left: 4px solid var(--primary);">
+        <div style="margin-top: 3rem; text-align: center; padding: 1.5rem; background: rgba(0, 168, 89, 0.1); border-left: 4px solid var(--primary); max-width: 1200px; margin-left: auto; margin-right: auto;">
             <h3 style="font-size: 1.5rem; color: var(--light); margin-bottom: 1rem; text-transform: uppercase; font-family: 'Racing Sans One', cursive;">
                 "Peritamos antes de que compres, para que decidas con confianza"
             </h3>
@@ -1983,170 +2440,343 @@
                 </div>
             </div>
         </div>
-    </div>
-</section>
+    </section>
 
-
-<!-- Sección Cómo Funciona con estilo de checklist animado -->
-<section class="process-section" id="process">
-    <div class="process-container">
-        <div class="section-title">
-            <h2>🚗 ¿Cómo funciona nuestro peritaje?</h2>
-            <p>Un proceso profesional paso a paso para tu tranquilidad</p>
-        </div>
-        
-        <div class="process-steps">
-            <!-- Paso 1 -->
-            <div class="process-step">
-                <div class="step-number">1</div>
-                <div class="step-content">
-                    <div class="step-header">
-                        <h3>Agendamiento del servicio</h3>
-                        <i class="fas fa-calendar-check step-icon"></i>
-                    </div>
-                    <p>Nos contactas y coordinamos fecha, hora y lugar según tu disponibilidad. Servicio a domicilio.</p>
-                    
-                </div>
+    <!-- Sección Cómo Funciona -->
+    <section class="process-section" id="process">
+        <div class="process-container">
+            <div class="section-title">
+                <h2>🚗 ¿Cómo funciona nuestro peritaje?</h2>
+                <p>Un proceso profesional paso a paso para tu tranquilidad</p>
             </div>
             
-            <!-- Paso 2 -->
-            <div class="process-step">
-                <div class="step-number">2</div>
-                <div class="step-content">
-                    <div class="step-header">
-                        <h3>Llegada del perito especializado</h3>
-                        <i class="fas fa-user-tie step-icon"></i>
-                    </div>
-                    <p>Un perito certificado se desplaza al punto acordado con escáner, gato hidráulico y herramientas profesionales.</p>
-                    
-                </div>
-            </div>
-            
-            <!-- Paso 3 -->
-            <div class="process-step">
-                <div class="step-number">3</div>
-                <div class="step-content">
-                    <div class="step-header">
-                        <h3>Registro del vehículo</h3>
-                        <i class="fas fa-camera step-icon"></i>
-                    </div>
-                    <p>Tomamos datos completos del vehículo y realizamos registro fotográfico exterior, interior y del motor.</p>
-                    
-                </div>
-            </div>
-            
-            <!-- Paso 4 -->
-            <div class="process-step">
-                <div class="step-number">4</div>
-                <div class="step-content">
-                    <div class="step-header">
-                        <h3>Verificación de documentación</h3>
-                        <i class="fas fa-file-alt step-icon"></i>
-                    </div>
-                    <p>Revisamos SOAT, tarjeta de propiedad, técnico-mecánica y reportes relevantes.</p>
-                    
-                </div>
-            </div>
-            
-            <!-- Paso 5 -->
-            <div class="process-step">
-                <div class="step-number">5</div>
-                <div class="step-content">
-                    <div class="step-header">
-                        <h3>Inspección visual y estructural</h3>
-                        <i class="fas fa-car-crash step-icon"></i>
-                    </div>
-                    <p>Evaluamos carrocería, chasis y alineaciones para detectar golpes, reparaciones o daños ocultos.</p>
-                   
-                </div>
-            </div>
-            
-            <!-- Paso 6 -->
-            <div class="process-step">
-                <div class="step-number">6</div>
-                <div class="step-content">
-                    <div class="step-header">
-                        <h3>Diagnóstico del motor</h3>
-                        <i class="fas fa-tachometer-alt step-icon"></i>
-                    </div>
-                    <p>Escaneo electrónico, revisión mecánica y comprobación del sistema eléctrico.</p>
-                    
-                </div>
-            </div>
-            
-            <!-- Paso 7 -->
-            <div class="process-step">
-                <div class="step-number">7</div>
-                <div class="step-content">
-                    <div class="step-header">
-                        <h3>Revisión de componentes mecánicos</h3>
-                        <i class="fas fa-cogs step-icon"></i>
-                    </div>
-                    <p>Inspección de fugas de fluidos, suspensión, frenos, tren delantero y llantas.</p>
-                    
-                </div>
-            </div>
-            
-            <!-- Paso 8 -->
-            <div class="process-step">
-                <div class="step-number">8</div>
-                <div class="step-content">
-                    <div class="step-header">
-                        <h3>Inspección del interior</h3>
-                        <i class="fas fa-chair step-icon"></i>
-                    </div>
-                    <p>Evaluamos estado interno, seguridad y accesorios adicionales.</p>
-                    
-                </div>
-            </div>
-            
-            <!-- Paso 9 -->
-            <div class="process-step">
-                <div class="step-number">9</div>
-                <div class="step-content">
-                    <div class="step-header">
-                        <h3>Prueba de ruta</h3>
-                        <i class="fas fa-road step-icon"></i>
-                    </div>
-                    <p>Probamos el vehículo en movimiento para evaluar frenado, aceleración, vibraciones y desempeño.</p>
-                    
-                </div>
-            </div>
-            
-            <!-- Paso 10 -->
-            <div class="process-step">
-                <div class="step-number">10</div>
-                <div class="step-content">
-                    <div class="step-header">
-                        <h3>Informe final y resultado</h3>
-                        <i class="fas fa-clipboard-check step-icon"></i>
-                    </div>
-                    <p>Entregamos un informe detallado con puntaje por sistema y concepto profesional.</p>
-                    <div class="step-result">
-                        <div class="result-option approved">
-                            <i class="fas fa-check-circle"></i>
-                            <span>✅ Aprobado</span>
+            <div class="process-steps">
+                <!-- Paso 1 -->
+                <div class="process-step">
+                    <div class="step-number">1</div>
+                    <div class="step-content">
+                        <div class="step-header">
+                            <h3>Agendamiento del servicio</h3>
+                            <i class="fas fa-calendar-check step-icon"></i>
                         </div>
-                        <div class="result-option rejected">
-                            <i class="fas fa-times-circle"></i>
-                            <span>❌ No aprobado</span>
+                        <p>Nos contactas y coordinamos fecha, hora y lugar según tu disponibilidad. Servicio a domicilio.</p>
+                    </div>
+                </div>
+                
+                <!-- Paso 2 -->
+                <div class="process-step">
+                    <div class="step-number">2</div>
+                    <div class="step-content">
+                        <div class="step-header">
+                            <h3>Llegada del perito especializado</h3>
+                            <i class="fas fa-user-tie step-icon"></i>
+                        </div>
+                        <p>Un perito certificado se desplaza al punto acordado con escáner, gato hidráulico y herramientas profesionales.</p>
+                    </div>
+                </div>
+                
+                <!-- Paso 3 -->
+                <div class="process-step">
+                    <div class="step-number">3</div>
+                    <div class="step-content">
+                        <div class="step-header">
+                            <h3>Registro del vehículo</h3>
+                            <i class="fas fa-camera step-icon"></i>
+                        </div>
+                        <p>Tomamos datos completos del vehículo y realizamos registro fotográfico exterior, interior y del motor.</p>
+                    </div>
+                </div>
+                
+                <!-- Paso 4 -->
+                <div class="process-step">
+                    <div class="step-number">4</div>
+                    <div class="step-content">
+                        <div class="step-header">
+                            <h3>Verificación de documentación</h3>
+                            <i class="fas fa-file-alt step-icon"></i>
+                        </div>
+                        <p>Revisamos SOAT, tarjeta de propiedad, técnico-mecánica y reportes relevantes.</p>
+                    </div>
+                </div>
+                
+                <!-- Paso 5 -->
+                <div class="process-step">
+                    <div class="step-number">5</div>
+                    <div class="step-content">
+                        <div class="step-header">
+                            <h3>Inspección visual y estructural</h3>
+                            <i class="fas fa-car-crash step-icon"></i>
+                        </div>
+                        <p>Evaluamos carrocería, chasis y alineaciones para detectar golpes, reparaciones o daños ocultos.</p>
+                    </div>
+                </div>
+                
+                <!-- Paso 6 -->
+                <div class="process-step">
+                    <div class="step-number">6</div>
+                    <div class="step-content">
+                        <div class="step-header">
+                            <h3>Diagnóstico del motor</h3>
+                            <i class="fas fa-tachometer-alt step-icon"></i>
+                        </div>
+                        <p>Escaneo electrónico, revisión mecánica y comprobación del sistema eléctrico.</p>
+                    </div>
+                </div>
+                
+                <!-- Paso 7 -->
+                <div class="process-step">
+                    <div class="step-number">7</div>
+                    <div class="step-content">
+                        <div class="step-header">
+                            <h3>Revisión de componentes mecánicos</h3>
+                            <i class="fas fa-cogs step-icon"></i>
+                        </div>
+                        <p>Inspección de fugas de fluidos, suspensión, frenos, tren delantero y llantas.</p>
+                    </div>
+                </div>
+                
+                <!-- Paso 8 -->
+                <div class="process-step">
+                    <div class="step-number">8</div>
+                    <div class="step-content">
+                        <div class="step-header">
+                            <h3>Inspección del interior</h3>
+                            <i class="fas fa-chair step-icon"></i>
+                        </div>
+                        <p>Evaluamos estado interno, seguridad y accesorios adicionales.</p>
+                    </div>
+                </div>
+                
+                <!-- Paso 9 -->
+                <div class="process-step">
+                    <div class="step-number">9</div>
+                    <div class="step-content">
+                        <div class="step-header">
+                            <h3>Prueba de ruta</h3>
+                            <i class="fas fa-road step-icon"></i>
+                        </div>
+                        <p>Probamos el vehículo en movimiento para evaluar frenado, aceleración, vibraciones y desempeño.</p>
+                    </div>
+                </div>
+                
+                <!-- Paso 10 -->
+                <div class="process-step">
+                    <div class="step-number">10</div>
+                    <div class="step-content">
+                        <div class="step-header">
+                            <h3>Informe final y resultado</h3>
+                            <i class="fas fa-clipboard-check step-icon"></i>
+                        </div>
+                        <p>Entregamos un informe detallado con puntaje por sistema y concepto profesional.</p>
+                        <div class="step-result">
+                            <div class="result-option approved">
+                                <i class="fas fa-check-circle"></i>
+                                <span>✅ Aprobado</span>
+                            </div>
+                            <div class="result-option rejected">
+                                <i class="fas fa-times-circle"></i>
+                                <span>❌ No aprobado</span>
+                            </div>
                         </div>
                     </div>
-                    
+                </div>
+            </div>
+            
+            <div class="process-cta">
+                <a href="#contact" class="cta-button process-button">
+                    <i class="fas fa-play-circle"></i> AGENDAR MI PERITAJE
+                </a>
+                <p class="cta-subtext">Proceso completo en 1-2 horas • Informe inmediato • Resultado transparente</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sección de Testimonios -->
+    <section class="testimonials-section" id="testimonials">
+        <div class="container">
+            <div class="section-title">
+                <h2>Lo que dicen nuestros clientes</h2>
+                <p>Experiencias reales de personas que confiaron en nuestro servicio</p>
+            </div>
+            
+            <div class="testimonials-grid">
+                <!-- Testimonio 1 -->
+                <div class="testimonial-card">
+                    <div class="testimonial-rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <span>5.0</span>
+                    </div>
+                    <p class="testimonial-text">"El peritaje me salvó de comprar un carro con motor adulterado. Invertí $240.000 y ahorré $15'000.000 en una mala compra."</p>
+                    <div class="testimonial-client">
+                        <div class="client-avatar">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <div class="client-info">
+                            <h4>Carlos Mendoza</h4>
+                            <p>Comprador en Bogotá</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Testimonio 2 -->
+                <div class="testimonial-card">
+                    <div class="testimonial-rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <span>5.0</span>
+                    </div>
+                    <p class="testimonial-text">"Profesionales y puntuales. El informe fue tan detallado que pude negociar $2'000.000 menos en el precio."</p>
+                    <div class="testimonial-client">
+                        <div class="client-avatar">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <div class="client-info">
+                            <h4>Ana Rodríguez</h4>
+                            <p>Vendedora en Soacha</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Testimonio 3 -->
+                <div class="testimonial-card">
+                    <div class="testimonial-rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star-half-alt"></i>
+                        <span>4.8</span>
+                    </div>
+                    <p class="testimonial-text">"Recomiendo 100% el peritaje oro. Detallaron cosas que ni el vendedor sabía. Ahora conduzco con total tranquilidad."</p>
+                    <div class="testimonial-client">
+                        <div class="client-avatar">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <div class="client-info">
+                            <h4>Miguel Torres</h4>
+                            <p>Comprador en Chía</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Estadísticas -->
+            <div class="stats-container">
+                <div class="stat-item">
+                    <h3 data-count="1000">0</h3>
+                    <p>Peritajes Realizados</p>
+                </div>
+                <div class="stat-item">
+                    <h3 data-count="98%">0</h3>
+                    <p>Clientes Satisfechos</p>
+                </div>
+                <div class="stat-item">
+                    <h3 data-count="40">0</h3>
+                    <p>Minutos para Informe</p>
+                </div>
+                <div class="stat-item">
+                    <h3 data-count="1">0</h3>
+                    <p>Hora de Inspección</p>
                 </div>
             </div>
         </div>
-        
-        <div class="process-cta">
-            <a href="#contact" class="cta-button process-button">
-                <i class="fas fa-play-circle"></i> AGENDAR MI PERITAJE
-            </a>
-            <p class="cta-subtext">Proceso completo en 1-2 horas • Informe inmediato • Resultado transparente</p>
+    </section>
+
+    <!-- Calculadora de Costos -->
+    <section class="calculator-section" id="calculator">
+        <div class="calculator-container">
+            <div class="section-title">
+                <h2>Calcula tu costo exacto</h2>
+                <p>Obtén el precio de tu peritaje en tiempo real</p>
+            </div>
+            
+            <div class="calculator">
+                <div class="calculator-form">
+                    <div class="calc-group">
+                        <label for="vehicle-type">Tipo de Vehículo</label>
+                        <select id="vehicle-type" class="calc-select">
+                            <option value="auto">Automóvil</option>
+                            <option value="camioneta">Camioneta</option>
+                            <option value="van">Mini Van / SUV</option>
+                            <option value="urban">Urban / Comercial</option>
+                            <option value="hibrido">Híbrido / Automático</option>
+                        </select>
+                    </div>
+                    
+                    <div class="calc-group">
+                        <label for="service-type">Tipo de Peritaje</label>
+                        <select id="service-type" class="calc-select">
+                            <option value="bronce">Peritaje Bronce</option>
+                            <option value="plata">Peritaje Plata</option>
+                            <option value="oro">Peritaje Oro</option>
+                        </select>
+                    </div>
+                    
+                    <div class="calc-group">
+                        <label for="add-services">Servicios Adicionales</label>
+                        <div class="checkbox-group">
+                            <label class="checkbox-label">
+                                <input type="checkbox" value="50000" data-service="improntas">
+                                <span>Toma de improntas (+$50.000)</span>
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" value="60000" data-service="legal">
+                                <span>Estado legal (+$60.000)</span>
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" value="200000" data-service="polichado">
+                                <span>Polichado (+$200.000)</span>
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <div class="calc-result">
+                        <div class="result-label">
+                            <span>Total a pagar:</span>
+                            <small>(Pago contra entrega)</small>
+                        </div>
+                        <div class="result-price">
+                            <span id="total-price">$0</span>
+                        </div>
+                    </div>
+                    
+                    <div class="calc-actions">
+                        <a href="https://wa.me/573007152606" class="calc-button" id="whatsapp-order" target="_blank">
+                            <i class="fab fa-whatsapp"></i> Pedir por WhatsApp
+                        </a>
+                        <a href="#contact" class="calc-button secondary">
+                            <i class="fas fa-calendar-alt"></i> Agendar Cita
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="calculator-info">
+                    <h3>¿Por qué usar nuestra calculadora?</h3>
+                    <ul class="calc-features">
+                        <li><i class="fas fa-check-circle"></i> <span>Precios transparentes sin sorpresas</span></li>
+                        <li><i class="fas fa-check-circle"></i> <span>Puedes personalizar tu paquete</span></li>
+                        <li><i class="fas fa-check-circle"></i> <span>Costo exacto antes de comprar</span></li>
+                        <li><i class="fas fa-check-circle"></i> <span>Pago contra entrega del informe</span></li>
+                        <li><i class="fas fa-check-circle"></i> <span>Descuento por paquetes combinados</span></li>
+                    </ul>
+                    
+                    <div class="calc-tip">
+                        <i class="fas fa-lightbulb"></i>
+                        <p><strong>Tip:</strong> El peritaje oro incluye revisión completa y te puede ahorrar millones en reparaciones futuras.</p>
+                    </div>
+                </div>
+            </div>
         </div>
-    </div>
-</section>
+    </section>
    
-    <!-- Sección Productos con estilo de neumáticos -->
+    <!-- Sección Productos -->
     <section class="products-section" id="products">
         <div class="products-container">
             <div class="section-title">
@@ -2166,7 +2796,6 @@
                     </div>
                 </div>
                 
-            
                 <div class="product-card">
                     <div class="product-image">
                         <img src="lavado motor.jpg" alt="Lavado de Motor" loading="lazy">
@@ -2225,7 +2854,8 @@
             </div>
         </div>
     </section>
-     <!-- Sección Nosotros con efecto de tablero (AHORA DESPUÉS DE SERVICIOS) -->
+
+    <!-- Sección Nosotros -->
     <section class="about-section" id="about">
         <div class="about-container">
             <div class="about-image">
@@ -2260,7 +2890,7 @@
                         </div>
                         <div class="feature-text">
                             <h3>Certificaciones</h3>
-                            <p>Profesionales acreditados internacionalmente</p>
+                            <p>Profesionales</p>
                         </div>
                     </div>
                     <div class="feature-item">
@@ -2269,7 +2899,7 @@
                         </div>
                         <div class="feature-text">
                             <h3>Rapidez</h3>
-                            <p>Informes en 1 - 2 horas</p>
+                            <p>Informes en 40 minutos</p>
                         </div>
                     </div>
                 </div>
@@ -2277,8 +2907,7 @@
         </div>
     </section>
 
-
-    <!-- Sección Contacto con estilo de garaje -->
+    <!-- Sección Contacto -->
     <section class="contact-section" id="contact">
         <div class="contact-container">
             <div class="contact-info">
@@ -2348,7 +2977,6 @@
                             <option value="Limpieza Interior">Limpieza Interior ($150.000)</option>
                             <option value="Análisis de Kilometraje">Análisis de Kilometraje ($100.000)</option>
                             <option value="Informe Ejecutivo">Informe Ejecutivo ($120.000)</option>
-                            
                         </select>
                     </div>
                     <div class="form-group">
@@ -2361,10 +2989,27 @@
         </div>
     </section>
 
-    <!-- WhatsApp Button con efecto de neón -->
-    <a href="https://wa.me/573007152606" class="whatsapp-button" target="_blank" aria-label="Contactar por WhatsApp">
-        <i class="fab fa-whatsapp"></i>
-    </a>
+    <!-- WhatsApp Button Mejorado -->
+    <div class="whatsapp-float">
+        <a href="https://wa.me/573007152606" class="whatsapp-button" target="_blank" aria-label="Contactar por WhatsApp">
+            <i class="fab fa-whatsapp"></i>
+        </a>
+        
+        <!-- Opciones flotantes -->
+        <div class="whatsapp-options">
+            <a href="https://wa.me/573007152606?text=¡Hola!%20Quiero%20cotizar%20un%20PERITAJE%20BRONCE%20para%20mi%20vehículo." class="wa-option" target="_blank">
+                <span>Peritaje Bronce</span>
+                <small>$140.000</small>
+            </a>
+            <a href="https://wa.me/573007152606?text=¡Hola!%20Quiero%20cotizar%20un%20PERITAJE%20ORO%20para%20mi%20vehículo." class="wa-option" target="_blank">
+                <span>Peritaje Oro</span>
+                <small>$240.000</small>
+            </a>
+            <a href="https://wa.me/573007152606?text=¡Hola!%20Quiero%20agendar%20una%20ASESORÍA%20GRATIS" class="wa-option" target="_blank">
+                <span>Asesoría Gratis</span>
+            </a>
+        </div>
+    </div>
 
     <!-- Modal para mostrar la descripción completa del servicio -->
     <div id="serviceModal" class="service-modal">
@@ -2377,8 +3022,7 @@
         </div>
     </div>
     
-
-    <!-- Footer con estilo de escape -->
+    <!-- Footer -->
     <footer>
         <div class="footer-container">
             <div class="footer-about">
@@ -2439,23 +3083,22 @@
                 </div>
             </div>
         </div>
-       <div class="footer-certifications">
-    <h3 style="text-align: center; width: 100%;">CERTIFICACIONES Y MÉTODOS DE PAGO</h3>
-    <p style="text-align: center; color: white; margin: 10px 0 20px; width: 100%;">
-        <i class="fas fa-hand-holding-usd" style="margin-right: 8px;"></i>Pagos contra entrega
-    </p>
-    <div class="certification-logos">
-        <img src="camara-comercio.png" alt="Cámara de Comercio" loading="lazy">
-        <img src="bancolombia.png" alt="Bancolombia" loading="lazy">
-        <img src="davivienda.png" alt="Davivienda" loading="lazy">
-        <img src="nequi.png" alt="Nequi" loading="lazy">
-        <img src="daviplata.png" alt="Daviplata" loading="lazy">
-    </div>
-</div>
+        <div class="footer-certifications">
+            <h3>CERTIFICACIONES Y MÉTODOS DE PAGO</h3>
+            <p style="text-align: center; color: white; margin: 10px 0 20px; width: 100%;">
+                <i class="fas fa-hand-holding-usd" style="margin-right: 8px;"></i>Pagos contra entrega
+            </p>
+            <div class="certification-logos">
+                <img src="camara-comercio.png" alt="Cámara de Comercio" loading="lazy">
+                <img src="bancolombia.png" alt="Bancolombia" loading="lazy">
+                <img src="davivienda.png" alt="Davivienda" loading="lazy">
+                <img src="nequi.png" alt="Nequi" loading="lazy">
+                <img src="daviplata.png" alt="Daviplata" loading="lazy">
+            </div>
+        </div>
         <div class="footer-bottom">
             <p>&copy; 2025 Perito Expert. Todos los derechos reservados. | <a href="#">Aviso de Privacidad</a></p>
         </div>
-       
     </footer>
 
     <script>
@@ -2494,90 +3137,6 @@
             }
         });
         
-        // Carrusel mejorado para móviles
-        const carousel = document.getElementById('carousel');
-        let isDown = false;
-        let startX;
-        let scrollLeft;
-
-        carousel.addEventListener('mousedown', (e) => {
-            isDown = true;
-            startX = e.pageX - carousel.offsetLeft;
-            scrollLeft = carousel.scrollLeft;
-        });
-
-        carousel.addEventListener('mouseleave', () => {
-            isDown = false;
-        });
-
-        carousel.addEventListener('mouseup', () => {
-            isDown = false;
-        });
-
-        carousel.addEventListener('mousemove', (e) => {
-            if (!isDown) return;
-            e.preventDefault();
-            const x = e.pageX - carousel.offsetLeft;
-            const walk = (x - startX) * 2;
-            carousel.scrollLeft = scrollLeft - walk;
-        });
-
-        // También para eventos táctiles
-        carousel.addEventListener('touchstart', (e) => {
-            isDown = true;
-            startX = e.touches[0].pageX - carousel.offsetLeft;
-            scrollLeft = carousel.scrollLeft;
-        });
-
-        carousel.addEventListener('touchend', () => {
-            isDown = false;
-        });
-
-        carousel.addEventListener('touchmove', (e) => {
-            if (!isDown) return;
-            e.preventDefault();
-            const x = e.touches[0].pageX - carousel.offsetLeft;
-            const walk = (x - startX) * 2;
-            carousel.scrollLeft = scrollLeft - walk;
-        });
-        
-        // Formulario de contacto
-        const contactForm = document.getElementById('contactForm');
-        
-        contactForm.addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            const submitButton = this.querySelector('button[type="submit"]');
-            submitButton.disabled = true;
-            submitButton.textContent = 'Enviando...';
-            
-            const formData = new FormData(this);
-            
-            fetch(this.action, {
-                method: 'POST',
-                body: formData,
-                headers: {
-                    'Accept': 'application/json'
-                }
-            })
-            .then(response => {
-                if (response.ok) {
-                    alert('Solicitud enviada con éxito. Nos pondremos en contacto contigo pronto.');
-                    contactForm.reset();
-                } else {
-                    throw new Error('Error al enviar el formulario');
-                }
-            })
-            .catch(error => {
-                alert('Hubo un problema al enviar tu solicitud. Por favor, inténtalo de nuevo más tarde.');
-                console.error(error);
-            })
-            .finally(() => {
-                submitButton.disabled = false;
-                submitButton.textContent = 'ENVIAR SOLICITUD';
-            });
-        });
-        
         // Smooth scrolling para enlaces
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function(e) {
@@ -2600,9 +3159,271 @@
                 }
             });
         });
+
+        // Calculadora de Costos - VERSIÓN FUNCIONAL
+        const priceMatrix = {
+            auto: { bronce: 140000, plata: 180000, oro: 240000 },
+            camioneta: { bronce: 180000, plata: 220000, oro: 280000 },
+            van: { bronce: 300000, plata: 300000, oro: 300000 },
+            urban: { bronce: 350000, plata: 350000, oro: 350000 },
+            hibrido: { bronce: 300000, plata: 300000, oro: 300000 }
+        };
+
+        function updateCalculator() {
+            try {
+                const vehicleType = document.getElementById('vehicle-type').value;
+                const serviceType = document.getElementById('service-type').value;
+                const checkboxes = document.querySelectorAll('input[type="checkbox"]:checked');
+                
+                // Precio base
+                let basePrice = 0;
+                if (priceMatrix[vehicleType] && priceMatrix[vehicleType][serviceType]) {
+                    basePrice = priceMatrix[vehicleType][serviceType];
+                }
+                
+                // Agregar servicios adicionales
+                let additionalPrice = 0;
+                checkboxes.forEach(checkbox => {
+                    additionalPrice += parseInt(checkbox.value) || 0;
+                });
+                
+                let totalPrice = basePrice + additionalPrice;
+                
+                // Actualizar precio
+                const totalElement = document.getElementById('total-price');
+                if (totalElement) {
+                    totalElement.textContent = `$${totalPrice.toLocaleString('es-CO')}`;
+                }
+                
+                // Actualizar enlace de WhatsApp
+                const whatsappLink = document.getElementById('whatsapp-order');
+                if (whatsappLink) {
+                    const vehicleText = document.querySelector('#vehicle-type option:checked').textContent;
+                    const serviceText = document.querySelector('#service-type option:checked').textContent;
+                    
+                    let servicesText = '';
+                    if (additionalPrice > 0) {
+                        servicesText = '\n\nServicios adicionales:';
+                        checkboxes.forEach(checkbox => {
+                            const serviceName = checkbox.closest('.checkbox-label').querySelector('span').textContent;
+                            servicesText += `\n• ${serviceName}`;
+                        });
+                    }
+                    
+                    const message = `¡Hola! Quiero cotizar un peritaje:\n\n• Vehículo: ${vehicleText}\n• Servicio: ${serviceText}${servicesText}\n• Total: $${totalPrice.toLocaleString('es-CO')}\n\n¿Podemos agendar?`;
+                    whatsappLink.href = `https://wa.me/573007152606?text=${encodeURIComponent(message)}`;
+                }
+                
+                return totalPrice;
+            } catch (error) {
+                console.error('Error en calculadora:', error);
+                return 0;
+            }
+        }
+
+        // Modal para servicios
+        const modal = document.getElementById('serviceModal');
+        const modalTitle = document.getElementById('modalServiceTitle');
+        const modalDesc = document.getElementById('modalServiceDescription');
+        const modalPrice = document.getElementById('modalServicePrice');
+        const closeBtn = document.querySelector('.close-modal');
         
-        // Optimización para iOS - Evitar zoom en inputs
+        // Datos completos de cada servicio
+        const servicesData = {
+            oro: {
+                title: "Peritaje ORO",
+                description: "Escaneo del motor (detecta si el velocímetro ha sido adulterado o si se han borrado códigos de falla).\n\nRevisión de bateria y alternador\n\nVerificación de golpes mediante espesor de pintura.\n\nRevisión de la estructura del chasis (accidentes o golpes anteriores).\n\nMedición de presión del motor (para conocer la compresión de los pistones).\n\nRevisión del sistema eléctrico, batería y alternador.\n\nRevisión de la caja (mecánica o automática).\n\nRevisión del desgaste interior del vehículo.\n\nPrueba de manejo.\n\nAntecedentes.\n\nVerificación del historial de propietarios anteriores.",
+                price: "VALOR $240.000"
+            },
+            plata: {
+                title: "Peritaje PLATA",
+                description: "Escaneo del motor (detecta si el velocímetro ha sido adulterado o si se han borrado códigos de falla).\n\nRevisión de bateria y alternador\n\nVerificación de golpes mediante espesor de pintura.\n\nRevisión de la estructura del chasis (accidentes o golpes anteriores).\n\nMedición de presión del motor (para conocer la compresión de los pistones).\n\nRevisión del sistema eléctrico, batería y alternador.\n\nRevisión de la caja (mecánica).\n\nRevisión del desgaste interior del vehículo.\n\nPrueba de manejo.",
+                price: "VALOR $180.000"
+            },
+            bronce: {
+                title: "Peritaje BRONCE",
+                description: "Escaneo del motor (detecta si el velocímetro ha sido adulterado o si se han borrado códigos de falla).\n\nRevisión de bateria y alternador\n\nVerificación de golpes mediante espesor de pintura.\n\nRevisión de la estructura del chasis (accidentes o golpes anteriores).\n\nMedición de presión del motor (para conocer la compresión de los pistones).\n\nRevisión del sistema eléctrico, batería y alternador.",
+                price: "VALOR $140.000"
+            },
+            van: {
+                title: "Peritaje Mini Vans",
+                description: "Escaneo del motor (detecta si el velocímetro ha sido adulterado o si se han borrado códigos de falla).\n\nRevisión de bateria y alternador\n\nVerificación de golpes mediante espesor de pintura.\n\nRevisión de la estructura del chasis (accidentes o golpes anteriores).\n\nMedición de presión del motor (para conocer la compresión de los pistones).\n\nRevisión del sistema eléctrico, batería y alternador.\n\nRevisión de la caja (mecánica).\n\nRevisión del desgaste interior del vehículo.\n\nPrueba de manejo.\n\nAntecedentes.\n\nVerificación del historial de propietarios anteriores.",
+                price: "VALOR $400.000"
+            },
+            hibrido: {
+                title: "Peritaje Automáticos e Híbridos",
+                description: "Escaneo del motor (detecta si el velocímetro ha sido adulterado o si se han borrado códigos de falla).\n\nRevisión de bateria y alternador\n\nVerificación de golpes mediante espesor de pintura.\n\nRevisión de la estructura del chasis (accidentes o golpes anteriores).\n\nRevisión del sistema eléctrico, batería y alternador.\n\nRevisión de la caja.\n\nRevisión del desgaste interior del vehículo.\n\nPrueba de manejo.\n\nAntecedentes.\n\nVerificación del historial de propietarios anteriores.",
+                price: "VALOR $260.000"
+            }
+        };
+
+        // Manejar clic en botones Saber Más
+        document.querySelectorAll('.know-more-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const serviceType = this.getAttribute('data-service');
+                const serviceData = servicesData[serviceType];
+                
+                if (serviceData) {
+                    modalTitle.textContent = serviceData.title;
+                    modalDesc.textContent = serviceData.description;
+                    modalPrice.textContent = serviceData.price;
+                    
+                    modal.style.display = 'block';
+                    document.body.style.overflow = 'hidden';
+                }
+            });
+        });
+
+        // Cerrar modal
+        closeBtn.addEventListener('click', function() {
+            modal.style.display = 'none';
+            document.body.style.overflow = 'auto';
+        });
+
+        // Cerrar al hacer clic fuera del contenido
+        modal.addEventListener('click', function(e) {
+            if (e.target === modal) {
+                modal.style.display = 'none';
+                document.body.style.overflow = 'auto';
+            }
+        });
+
+        // Cerrar con tecla ESC
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape' && modal.style.display === 'block') {
+                modal.style.display = 'none';
+                document.body.style.overflow = 'auto';
+            }
+        });
+
+        // Animación de contador para estadísticas
+        function animateCounter() {
+            const counters = document.querySelectorAll('.stat-item h3');
+            
+            counters.forEach(counter => {
+                const target = parseInt(counter.getAttribute('data-count'));
+                const suffix = counter.textContent.includes('%') ? '%' : '';
+                let count = 0;
+                const increment = target / 100;
+                const duration = 2000;
+                const step = duration / 100;
+                
+                const timer = setInterval(() => {
+                    count += increment;
+                    if (count >= target) {
+                        count = target;
+                        clearInterval(timer);
+                    }
+                    counter.textContent = Math.floor(count) + suffix;
+                }, step);
+            });
+        }
+        
+        // Observador para animar contadores cuando sean visibles
+        const statsObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    animateCounter();
+                    statsObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.5 });
+        
+        // Observar la sección de estadísticas
+        const statsSection = document.querySelector('.stats-container');
+        if (statsSection) {
+            statsObserver.observe(statsSection);
+        }
+        
+        // Animación para pasos del proceso
+        function animateProcessSteps() {
+            const steps = document.querySelectorAll('.process-step');
+            
+            steps.forEach((step, index) => {
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            setTimeout(() => {
+                                step.classList.add('animated');
+                            }, index * 200);
+                            observer.unobserve(step);
+                        }
+                    });
+                }, {
+                    threshold: 0.1,
+                    rootMargin: '0px 0px -50px 0px'
+                });
+                
+                observer.observe(step);
+            });
+        }
+        
+        // Inicializar todo cuando el DOM esté listo
         document.addEventListener('DOMContentLoaded', function() {
+            // Inicializar calculadora
+            const calculatorInputs = document.querySelectorAll('.calc-select, input[type="checkbox"]');
+            calculatorInputs.forEach(input => {
+                input.addEventListener('change', updateCalculator);
+            });
+            
+            // Calcular precio inicial
+            updateCalculator();
+            
+            // Inicializar animaciones
+            animateProcessSteps();
+            
+            // Configurar animaciones de testimonios
+            const testimonialCards = document.querySelectorAll('.testimonial-card');
+            testimonialCards.forEach((card, index) => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(20px)';
+                
+                setTimeout(() => {
+                    card.style.transition = 'all 0.5s ease';
+                    card.style.opacity = '1';
+                    card.style.transform = 'translateY(0)';
+                }, index * 200);
+            });
+            
+            // Formulario de contacto
+            const contactForm = document.getElementById('contactForm');
+            if (contactForm) {
+                contactForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    
+                    const submitButton = this.querySelector('button[type="submit"]');
+                    submitButton.disabled = true;
+                    submitButton.textContent = 'Enviando...';
+                    
+                    const formData = new FormData(this);
+                    
+                    fetch(this.action, {
+                        method: 'POST',
+                        body: formData,
+                        headers: {
+                            'Accept': 'application/json'
+                        }
+                    })
+                    .then(response => {
+                        if (response.ok) {
+                            alert('Solicitud enviada con éxito. Nos pondremos en contacto contigo pronto.');
+                            contactForm.reset();
+                        } else {
+                            throw new Error('Error al enviar el formulario');
+                        }
+                    })
+                    .catch(error => {
+                        alert('Hubo un problema al enviar tu solicitud. Por favor, inténtalo de nuevo más tarde.');
+                        console.error(error);
+                    })
+                    .finally(() => {
+                        submitButton.disabled = false;
+                        submitButton.textContent = 'ENVIAR SOLICITUD';
+                    });
+                });
+            }
+            
+            // Optimización para iOS
             if (navigator.userAgent.match(/iPhone|iPad|iPod/i)) {
                 document.querySelectorAll('input, textarea').forEach(el => {
                     el.addEventListener('focus', function() {
@@ -2612,252 +3433,6 @@
                 });
             }
         });
-        
-        // Efectos de velocidad aleatorios (solo en desktop)
-        function createSpeedLine() {
-            if (window.innerWidth > 768) {
-                const speedLine = document.createElement('div');
-                speedLine.classList.add('speed-line');
-                
-                const viewportHeight = window.innerHeight;
-                const randomTop = Math.random() * viewportHeight;
-                
-                const randomWidth = 100 + Math.random() * 300;
-                
-                speedLine.style.top = `${randomTop}px`;
-                speedLine.style.width = `${randomWidth}px`;
-                speedLine.style.animationDuration = `${1 + Math.random() * 2}s`;
-                speedLine.style.animationDelay = `${Math.random() * 3}s`;
-                
-                document.body.appendChild(speedLine);
-                
-                setTimeout(() => {
-                    speedLine.remove();
-                }, 3000);
-            }
-        }
-        
-        // Crear líneas de velocidad cada cierto tiempo (solo en desktop)
-        if (window.innerWidth > 768) {
-            setInterval(createSpeedLine, 500);
-        }
-
-        // Modal para mostrar descripción completa del servicio
-        const modal = document.getElementById('serviceModal');
-        const modalTitle = document.getElementById('modalServiceTitle');
-        const modalDesc = document.getElementById('modalServiceDescription');
-        const modalPrice = document.getElementById('modalServicePrice');
-        const closeBtn = document.querySelector('.close-modal');
-        
-        // Datos completos de cada servicio
-        const servicesData = {
-            oro: {
-                title: "Peritaje ORO",
-                description: "Escaneo del motor (detecta si el velocímetro ha sido adulterado o si se han borrado códigos de falla).\n\nrevisión de bateria y alternador\n\nVerificación de golpes mediante espesor de pintura.\n\nRevisión de la estructura del chasis (accidentes o golpes anteriores).\n\nMedición de presión del motor (para conocer la compresión de los pistones).\n\nRevisión del sistema eléctrico, batería y alternador.\n\nRevisión de la caja (mecánica o automática).\n\nRevisión del desgaste interior del vehículo.\n\nPrueba de manejo.\n\n antecedentes.\n\nVerificación del historial de propietarios anteriores.",
-                price: "VALOR $240.000"
-            },
-            plata: {
-                title: "Peritaje PLATA",
-                description: "Escaneo del motor (detecta si el velocímetro ha sido adulterado o si se han borrado códigos de falla).\n\nrevisión de bateria y alternador\n\nVerificación de golpes mediante espesor depintura",
-                price: "VALOR $180.000"  
-            },
-            bronce: {
-                title: "Peritaje BRONCE",
-                description: "Escaneo del motor (detecta si el velocímetro ha sido adulterado o si se han borrado códigos de falla).\n\nrevisión de bateria y alternador\n\nVerificación de golpes mediante espesor depintura",
-                price: "VALOR $140.000"  
-            },
-
-        }
-<script>
-     document.addEventListener('DOMContentLoaded', function() {
-        const modal = document.getElementById('serviceModal');
-        const modalTitle = document.getElementById('modalServiceTitle');
-        const modalDesc = document.getElementById('modalServiceDescription');
-        const modalPrice = document.getElementById('modalServicePrice');
-        const closeBtn = document.querySelector('.close-modal');
-        
-        // Datos completos de cada servicio
-        const servicesData = {
-            oro: {
-                title: "Peritaje ORO",
-                description: "Escaneo del motor (detecta si el velocímetro ha sido adulterado o si se han borrado códigos de falla).\n\nrevisión de bateria y alternador\n\nVerificación de golpes mediante espesor de pintura.\n\nRevisión de la estructura del chasis (accidentes o golpes anteriores).\n\nMedición de presión del motor (para conocer la compresión de los pistones).\n\nRevisión del sistema eléctrico, batería y alternador.\n\nRevisión de la caja (mecánica o automática).\n\nRevisión del desgaste interior del vehículo.\n\nPrueba de manejo.\n\n antecedentes.\n\nVerificación del historial de propietarios anteriores.",
-                price: "VALOR $240.000"
-            },
-            plata: {
-                title: "Peritaje PLATA",
-                description: "Escaneo del motor (detecta si el velocímetro ha sido adulterado o si se han borrado códigos de falla).\n\nrevisión de bateria y alternador\n\nVerificación de golpes mediante espesor de pintura.\n\nRevisión de la estructura del chasis (accidentes o golpes anteriores).\n\nMedición de presión del motor (para conocer la compresión de los pistones).\n\nRevisión del sistema eléctrico, batería y alternador.\n\nRevisión de la caja (mecánica o automática).\n\nRevisión del desgaste interior del vehículo.\n\nPrueba de manejo.",
-                price: "VALOR $180.000"
-            },
-            bronce: {
-                title: "Peritaje BRONCE",
-                description: "Escaneo del motor (detecta si el velocímetro ha sido adulterado o si se han borrado códigos de falla).\n\nrevisión de bateria y alternador\n\nVerificación de golpes mediante espesor de pintura.\n\nRevisión de la estructura del chasis (accidentes o golpes anteriores).\n\nMedición de presión del motor (para conocer la compresión de los pistones).\n\nRevisión del sistema eléctrico, batería y alternador.",
-                price: "VALOR $140.000"
-            }
-        };
-
-        // Manejar clic en botones Saber Más
-        document.querySelectorAll('.know-more-btn').forEach(btn => {
-            btn.addEventListener('click', function() {
-                const serviceType = this.getAttribute('data-service');
-                const serviceData = servicesData[serviceType];
-                
-                modalTitle.textContent = serviceData.title;
-                modalDesc.textContent = serviceData.description;
-                modalPrice.textContent = serviceData.price;
-                
-                modal.style.display = 'block';
-                document.body.style.overflow = 'hidden';
-            });
-        });
-
-        // Cerrar modal
-        closeBtn.addEventListener('click', function() {
-            modal.style.display = 'none';
-            document.body.style.overflow = 'auto';
-        });
-
-        // Cerrar al hacer clic fuera del contenido
-        modal.addEventListener('click', function(e) {
-            if (e.target === modal) {
-                modal.style.display = 'none';
-                document.body.style.overflow = 'auto';
-            }
-        });
-
-        // Cerrar con tecla ESC
-        document.addEventListener('keydown', function(e) {
-            if (e.key === 'Escape' && modal.style.display === 'block') {
-                modal.style.display = 'none';
-                document.body.style.overflow = 'auto';
-            }
-        });
-    });
-</script>
-<div id="serviceModal" class="service-modal">
-    <div class="modal-content">
-        <span class="close-modal">&times;</span>
-        <h3 class="modal-title" id="modalServiceTitle">Peritaje ORO</h3>
-        <p class="modal-description" id="modalServiceDescription">
-            Escaneo del motor (detecta si el velocímetro ha sido adulterado o si se han borrado códigos de falla).
-            Verificación de golpes mediante espesor de pintura.
-            Revisión de bateria y alternador
-            Revisión de la estructura del chasis (accidentes o golpes anteriores).
-            Medición de presión del motor (para conocer la compresión de los pistones).
-            Revisión del sistema eléctrico, batería y alternador.
-            Revisión de la caja (mecánica o automática).
-            Revisión del desgaste interior del vehículo.
-            Prueba de manejo.
-            Antecedentes.
-            Verificación del historial de propietarios anteriores.
-        </p>
-        <div class="modal-price" id="modalServicePrice">VALOR $240.000</div>
-        <a href="#contact" class="service-button">SOLICITAR</a>
-    </div>
-</div>
-
-<script>
-    // Agrega esto al final del script existente
-    document.addEventListener('DOMContentLoaded', function() {
-        const modal = document.getElementById('serviceModal');
-        const modalTitle = document.getElementById('modalServiceTitle');
-        const modalDesc = document.getElementById('modalServiceDescription');
-        const modalPrice = document.getElementById('modalServicePrice');
-        const closeBtn = document.querySelector('.close-modal');
-        
-        // Datos completos de cada servicio
-        const servicesData = {
-            oro: {
-                title: "Peritaje ORO",
-                description: "Escaneo del motor (detecta si el velocímetro ha sido adulterado o si se han borrado códigos de falla).\n\nRevisión de bateria y alternador\n\nVerificación de golpes mediante espesor de pintura.\n\nRevisión de la estructura del chasis (accidentes o golpes anteriores).\n\nMedición de presión del motor (para conocer la compresión de los pistones).\n\nRevisión del sistema eléctrico, batería y alternador.\n\nRevisión de la caja (mecánica o automática).\n\nRevisión del desgaste interior del vehículo.\n\nPrueba de manejo.\n\n Antecedentes.\n\nVerificación del historial de propietarios anteriores.",
-                price: "VALOR $240.000"
-            },
-            plata: {
-                title: "Peritaje PLATA",
-                description: "Escaneo del motor (detecta si el velocímetro ha sido adulterado o si se han borrado códigos de falla).\n\nRevisión de bateria y alternador\n\nVerificación de golpes mediante espesor de pintura.\n\nRevisión de la estructura del chasis (accidentes o golpes anteriores).\n\nMedición de presión del motor (para conocer la compresión de los pistones).\n\nRevisión del sistema eléctrico, batería y alternador.\n\nRevisión de la caja (mecánica o automática).\n\nRevisión del desgaste interior del vehículo.\n\nPrueba de manejo.",
-                price: "VALOR $180.000"
-            },
-            bronce: {
-                title: "Peritaje BRONCE",
-                description: "Escaneo del motor (detecta si el velocímetro ha sido adulterado o si se han borrado códigos de falla).\n\nRevisión de bateria y alternador\n\nVerificación de golpes mediante espesor de pintura.\n\nRevisión de la estructura del chasis (accidentes o golpes anteriores).\n\nMedición de presión del motor (para conocer la compresión de los pistones).\n\nRevisión del sistema eléctrico, batería y alternador.",
-                price: "VALOR $140.000"
-            }
-        };
-
-        // Manejar clic en botones Saber Más
-        document.querySelectorAll('.know-more-btn').forEach(btn => {
-            btn.addEventListener('click', function() {
-                const serviceType = this.getAttribute('data-service');
-                const serviceData = servicesData[serviceType];
-                
-                modalTitle.textContent = serviceData.title;
-                modalDesc.textContent = serviceData.description;
-                modalPrice.textContent = serviceData.price;
-                
-                modal.style.display = 'block';
-                document.body.style.overflow = 'hidden';
-            });
-        });
-
-        // Cerrar modal
-        closeBtn.addEventListener('click', function() {
-            modal.style.display = 'none';
-            document.body.style.overflow = 'auto';
-        });
-
-        // Cerrar al hacer clic fuera del contenido
-        modal.addEventListener('click', function(e) {
-            if (e.target === modal) {
-                modal.style.display = 'none';
-                document.body.style.overflow = 'auto';
-            }
-        });
-
-        // Cerrar con tecla ESC
-        document.addEventListener('keydown', function(e) {
-            if (e.key === 'Escape' && modal.style.display === 'block') {
-                modal.style.display = 'none';
-                document.body.style.overflow = 'auto';
-            }
-        });
-    });
-    // Animación para los pasos del proceso
-function animateProcessSteps() {
-    const steps = document.querySelectorAll('.process-step');
-    
-    steps.forEach((step, index) => {
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    setTimeout(() => {
-                        step.classList.add('animated');
-                    }, index * 200); // Retraso escalonado
-                    observer.unobserve(step);
-                }
-            });
-        }, {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        });
-        
-        observer.observe(step);
-    });
-}
-
-// Inicializar animaciones cuando el DOM esté listo
-document.addEventListener('DOMContentLoaded', function() {
-    animateProcessSteps();
-});
-
-// También para cuando se haga scroll
-window.addEventListener('scroll', function() {
-    if (!window.processStepsAnimated) {
-        animateProcessSteps();
-        window.processStepsAnimated = true;
-    }
-});
-</script>
+    </script>
 </body>
 </html>
-
-
-
