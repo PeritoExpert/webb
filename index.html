@@ -26,6 +26,13 @@
 <link rel="preload" as="image" href="PeritoExpert_1.png" fetchpriority="high">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" media="print" onload="this.media='all'">
 <link href="https://fonts.googleapis.com/css2?family=Racing+Sans+One&family=Exo+2:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<!-- THREE.JS Y LOADERS CARGADOS EN EL HEAD PARA EVITAR ERRORES -->
+<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/build/three.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/GLTFLoader.js"></script>
+<!-- KTX2Loader es necesario para texturas comprimidas -->
+<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/KTX2Loader.js"></script>
+
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -1226,7 +1233,15 @@ rimLight.position.set(0,5,-5);
 scene.add(rimLight);
 const carGroup=new THREE.Group();
 scene.add(carGroup);
+
+/* CONFIGURACIÓN DEL KTX2LOADER (Texturas comprimidas) */
+const ktx2Loader = new THREE.KTX2Loader();
+ktx2Loader.setTranscoderPath('https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/libs/basis/');
+ktx2Loader.detectSupport(renderer);
+
 const gltfLoader=new THREE.GLTFLoader();
+gltfLoader.setKTX2Loader(ktx2Loader);
+
 gltfLoader.load('Carro3d.glb',function(gltf){
 const model=gltf.scene;
 const box=new THREE.Box3().setFromObject(model);
@@ -1260,6 +1275,7 @@ loadingEl.innerHTML = '<div style="text-align:center; padding: 20px;"><i class="
 }
 createFallbackCar(carGroup);
 });
+
 const tooltip=document.getElementById('model3dTooltip');
 const raycaster=new THREE.Raycaster();
 const mouse=new THREE.Vector2();
@@ -1267,10 +1283,6 @@ let hoveredIndex=-1;
 let hotspotMeshes=[];
 let activeHotspot = null;
 
-/* ============================================================
-   HOTSPOTS DEL MODELO REAL (.glb)
-   Distribución: 2 frente + 2 atrás + 3 derecha + 3 izquierda = 10
-   ============================================================ */
 function addHotspots(group, size, scale){
 const w = size.x * scale;
 const h = size.y * scale;
@@ -1324,9 +1336,6 @@ hotspotMeshes.push(sphere);
 });
 }
 
-/* ============================================================
-   CARRO DE RESPALDO (si falla el .glb) — misma distribución
-   ============================================================ */
 function createFallbackCar(group){
 const w = 4;
 const h = 1.5;
@@ -1396,16 +1405,12 @@ hotspotMeshes.push(sphere);
 });
 }
 
-/* ============================================================
-   TOOLTIP — se recalcula cada frame y respeta oclusión
-   ============================================================ */
 function updateTooltipPosition(){
  if(!activeHotspot){ return; }
  const rect = renderer.domElement.getBoundingClientRect();
  const worldPos = new THREE.Vector3();
  activeHotspot.getWorldPosition(worldPos);
 
- // ¿Está delante de la cámara?
  const camDir = new THREE.Vector3();
  camera.getWorldDirection(camDir);
  const toHotspot = worldPos.clone().sub(camera.position);
@@ -1429,7 +1434,6 @@ renderer.domElement.addEventListener('mousemove',(e)=>{
  mouse.y = -((e.clientY - rect.top) / rect.height) * 2 + 1;
  raycaster.setFromCamera(mouse, camera);
 
- // Detectar bolitas Y modelo del carro para respetar oclusión
  const objectsToCheck = [...hotspotMeshes];
  carGroup.traverse(child => {
    if(child.isMesh && !hotspotMeshes.includes(child)){
@@ -1503,7 +1507,6 @@ function animate(time){
    const scale=1+Math.sin(time*0.003+i)*0.25;
    s.scale.setScalar(scale);
  });
- // Recalcular tooltip cada frame para que siga a la bolita al girar
  if(activeHotspot){
    updateTooltipPosition();
  }
@@ -1558,17 +1561,8 @@ stickyCta.style.display='none';
 });
 const model3dViewer=document.getElementById('model3dViewer');
 const model3dLoading=document.getElementById('model3dLoading');
-const scriptGLTF=document.createElement('script');
-scriptGLTF.src='https://cdn.jsdelivr.net/npm/three@0.128.0/build/three.min.js';
-scriptGLTF.onload=function(){
-const loaderScript=document.createElement('script');
-loaderScript.src='https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/GLTFLoader.js';
-loaderScript.onload=function(){
+// El script ahora se inicializa directamente porque Three.js ya está cargado en el HEAD
 initCarModel(model3dViewer,model3dLoading);
-};
-document.body.appendChild(loaderScript);
-};
-document.body.appendChild(scriptGLTF);
 });
 </script>
 </body>
