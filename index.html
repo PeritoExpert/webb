@@ -27,7 +27,7 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" media="print" onload="this.media='all'">
 <link href="https://fonts.googleapis.com/css2?family=Racing+Sans+One&family=Exo+2:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
-<!-- Three.js moderno usando Import Maps (La forma oficial y más efectiva) -->
+<!-- Three.js moderno usando Import Maps -->
 <script type="importmap">
 {
   "imports": {
@@ -1215,11 +1215,12 @@ observer.observe(step);
 }
 </script>
 
-<!-- AQUÍ INICIA EL SCRIPT EN MODO MÓDULO PARA EL MODELO 3D -->
+<!-- SCRIPT EN MODO MÓDULO PARA EL MODELO 3D CON SOPORTE TOTAL DE COMPRESIÓN -->
 <script type="module">
 import * as THREE from 'three';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import { KTX2Loader } from 'three/addons/loaders/KTX2Loader.js';
+import { MeshoptDecoder } from 'three/addons/libs/meshopt_decoder.module.js';
 
 function initCarModel(container, loadingEl){
   const scene = new THREE.Scene();
@@ -1253,14 +1254,14 @@ function initCarModel(container, loadingEl){
   const carGroup = new THREE.Group();
   scene.add(carGroup);
 
-  // 1. Configurar KTX2Loader para texturas comprimidas
+  // Configurar todos los decodificadores necesarios para el modelo
   const ktx2Loader = new KTX2Loader()
     .setTranscoderPath('https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/libs/basis/')
     .detectSupport(renderer);
 
-  // 2. Cargar el modelo con el GLTFLoader moderno
   const gltfLoader = new GLTFLoader();
   gltfLoader.setKTX2Loader(ktx2Loader);
+  gltfLoader.setMeshoptDecoder(MeshoptDecoder); // <-- ESTO SOLUCIONA EL ERROR
 
   gltfLoader.load('Carro3d.glb', function(gltf) {
     const model = gltf.scene;
