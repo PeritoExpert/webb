@@ -26,6 +26,17 @@
 <link rel="preload" as="image" href="PeritoExpert_1.png" fetchpriority="high">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" media="print" onload="this.media='all'">
 <link href="https://fonts.googleapis.com/css2?family=Racing+Sans+One&family=Exo+2:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<!-- Three.js moderno usando Import Maps -->
+<script type="importmap">
+{
+  "imports": {
+    "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
+    "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"
+  }
+}
+</script>
+
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -1202,373 +1213,306 @@ observer.unobserve(step);
 observer.observe(step);
 });
 }
-function initCarModel(container,loadingEl){
-const scene=new THREE.Scene();
-scene.background=null;
-const camera=new THREE.PerspectiveCamera(45,container.clientWidth/container.clientHeight,0.1,1000);
-camera.position.set(2.5, 1.5, 4);
-camera.lookAt(0, 0.5, 0);
-const renderer=new THREE.WebGLRenderer({antialias:true, alpha: true});
-renderer.setSize(container.clientWidth,container.clientHeight);
-renderer.setPixelRatio(Math.min(window.devicePixelRatio,2));
-renderer.setClearColor(0x000000, 0);
-container.appendChild(renderer.domElement);
-const ambient=new THREE.AmbientLight(0xffffff,1.5);
-scene.add(ambient);
-const directional=new THREE.DirectionalLight(0xffffff,1.5);
-directional.position.set(5,10,5);
-scene.add(directional);
-const fillLight=new THREE.PointLight(0x00a859,1.5,50);
-fillLight.position.set(-5,5,5);
-scene.add(fillLight);
-const rimLight=new THREE.PointLight(0x991813,1,50);
-rimLight.position.set(0,5,-5);
-scene.add(rimLight);
-const carGroup=new THREE.Group();
-scene.add(carGroup);
-const gltfLoader=new THREE.GLTFLoader();
-gltfLoader.load('Carro3d.glb',function(gltf){
-const model=gltf.scene;
-const box=new THREE.Box3().setFromObject(model);
-const size=box.getSize(new THREE.Vector3());
-const center=box.getCenter(new THREE.Vector3());
-model.position.x=-center.x;
-model.position.y=-box.min.y;
-model.position.z=-center.z;
-const maxDim=Math.max(size.x,size.y,size.z);
-const scale=6/maxDim;
-model.scale.set(scale,scale,scale);
-model.position.multiplyScalar(scale);
-model.traverse(child=>{
-if(child.isMesh){
-child.castShadow=false;
-child.receiveShadow=false;
+</script>
+
+<!-- SCRIPT EN MODO MÓDULO PARA EL MODELO 3D CON SOPORTE TOTAL DE COMPRESIÓN -->
+<script type="module">
+import * as THREE from 'three';
+import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
+import { KTX2Loader } from 'three/addons/loaders/KTX2Loader.js';
+import { MeshoptDecoder } from 'three/addons/libs/meshopt_decoder.module.js';
+
+function initCarModel(container, loadingEl){
+  const scene = new THREE.Scene();
+  scene.background = null;
+  
+  const camera = new THREE.PerspectiveCamera(45, container.clientWidth / container.clientHeight, 0.1, 1000);
+  camera.position.set(2.5, 1.5, 4);
+  camera.lookAt(0, 0.5, 0);
+  
+  const renderer = new THREE.WebGLRenderer({antialias: true, alpha: true});
+  renderer.setSize(container.clientWidth, container.clientHeight);
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+  renderer.setClearColor(0x000000, 0);
+  container.appendChild(renderer.domElement);
+  
+  const ambient = new THREE.AmbientLight(0xffffff, 1.5);
+  scene.add(ambient);
+  
+  const directional = new THREE.DirectionalLight(0xffffff, 1.5);
+  directional.position.set(5, 10, 5);
+  scene.add(directional);
+  
+  const fillLight = new THREE.PointLight(0x00a859, 1.5, 50);
+  fillLight.position.set(-5, 5, 5);
+  scene.add(fillLight);
+  
+  const rimLight = new THREE.PointLight(0x991813, 1, 50);
+  rimLight.position.set(0, 5, -5);
+  scene.add(rimLight);
+  
+  const carGroup = new THREE.Group();
+  scene.add(carGroup);
+
+  // Configurar todos los decodificadores necesarios para el modelo
+  const ktx2Loader = new KTX2Loader()
+    .setTranscoderPath('https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/libs/basis/')
+    .detectSupport(renderer);
+
+  const gltfLoader = new GLTFLoader();
+  gltfLoader.setKTX2Loader(ktx2Loader);
+  gltfLoader.setMeshoptDecoder(MeshoptDecoder); // <-- ESTO SOLUCIONA EL ERROR
+
+  gltfLoader.load('Carro3d.glb', function(gltf) {
+    const model = gltf.scene;
+    const box = new THREE.Box3().setFromObject(model);
+    const size = box.getSize(new THREE.Vector3());
+    const center = box.getCenter(new THREE.Vector3());
+    model.position.x = -center.x;
+    model.position.y = -box.min.y;
+    model.position.z = -center.z;
+    const maxDim = Math.max(size.x, size.y, size.z);
+    const scale = 6 / maxDim;
+    model.scale.set(scale, scale, scale);
+    model.position.multiplyScalar(scale);
+    model.traverse(child => {
+      if(child.isMesh){
+        child.castShadow = false;
+        child.receiveShadow = false;
+      }
+    });
+    carGroup.add(model);
+    loadingEl.style.display = 'none';
+    addHotspots(carGroup, size, scale);
+  }, function(xhr) {
+    const percent = Math.round((xhr.loaded / xhr.total) * 100);
+    if (loadingEl) {
+      loadingEl.innerHTML = '<i class="fas fa-spinner"></i><span>Cargando modelo 3D... ' + percent + '%</span>';
+    }
+  }, function(error) {
+    console.error('Error cargando Carro3d.glb:', error);
+    if (loadingEl) {
+      loadingEl.innerHTML = '<div style="text-align:center; padding: 20px;"><i class="fas fa-exclamation-triangle" style="color: #ffd700; font-size: 2rem; margin-bottom: 10px;"></i><br><strong style="color: #fff;">No se pudo cargar el archivo Carro3d.glb</strong><br><span style="font-size: 0.9rem; color: #cbd5e1;">Revisa que el archivo esté en la misma carpeta, que se llame exactamente así y que uses un servidor local (no abras el archivo con doble clic).</span></div>';
+    }
+    createFallbackCar(carGroup);
+  });
+
+  const tooltip = document.getElementById('model3dTooltip');
+  const raycaster = new THREE.Raycaster();
+  const mouse = new THREE.Vector2();
+  let hotspotMeshes = [];
+  let activeHotspot = null;
+
+  function addHotspots(group, size, scale) {
+    const w = size.x * scale;
+    const h = size.y * scale;
+    const d = size.z * scale;
+    const sphereRadius = Math.max(w, d) * 0.025;
+    const sideOffset  = w * 0.50;
+    const frontZ      = d * 0.48;
+    const rearZ       = -d * 0.48;
+    const midY        = h * 0.55;
+    const lowY        = h * 0.35;
+
+    const hotspotData = [
+      {pos:new THREE.Vector3(-w*0.28, midY, frontZ), title:"Escaneo OBD-II", desc:"Conectamos un escáner profesional al puerto OBD-II para detectar códigos de falla y adulteración del velocímetro."},
+      {pos:new THREE.Vector3( w*0.28, midY, frontZ), title:"Faros y luces delanteras", desc:"Verificamos luces, faros, dirección y sensores delanteros del vehículo."},
+      {pos:new THREE.Vector3(-w*0.28, midY, rearZ), title:"Estado legal y antecedentes", desc:"Revisión del historial del vehículo, propietarios anteriores y estado legal."},
+      {pos:new THREE.Vector3( w*0.28, midY, rearZ), title:"Luces traseras y escape", desc:"Verificamos luces traseras, sistema de escape y estado general del maletero."},
+      {pos:new THREE.Vector3( sideOffset, midY,  d*0.30), title:"Medición de pintura (delantero der.)", desc:"Medimos el espesor de pintura en el panel delantero derecho para detectar golpes y repintados ocultos."},
+      {pos:new THREE.Vector3( sideOffset, lowY,  0),       title:"Revisión de chasis lateral der.", desc:"Inspeccionamos soldaduras, largueros y puntos de anclaje del costado derecho para detectar accidentes estructurales."},
+      {pos:new THREE.Vector3( sideOffset, midY, -d*0.30), title:"Sistema eléctrico (trasero der.)", desc:"Verificamos batería, alternador y cableado del panel trasero derecho."},
+      {pos:new THREE.Vector3(-sideOffset, midY,  d*0.30), title:"Medición de pintura (delantero izq.)", desc:"Medimos el espesor de pintura en el panel delantero izquierdo para detectar golpes y repintados ocultos."},
+      {pos:new THREE.Vector3(-sideOffset, lowY,  0),       title:"Revisión de chasis lateral izq.", desc:"Inspeccionamos soldaduras, largueros y puntos de anclaje del costado izquierdo."},
+      {pos:new THREE.Vector3(-sideOffset, midY, -d*0.30), title:"Caja de cambios / Transmisión", desc:"Revisión de la caja (mecánica o automática) y desgaste interior del vehículo."},
+    ];
+
+    const hotspotMat = new THREE.MeshBasicMaterial({color:0x00a859});
+    hotspotData.forEach((h,i)=>{
+      const sphere = new THREE.Mesh(new THREE.SphereGeometry(sphereRadius, 20, 20), hotspotMat.clone());
+      sphere.position.copy(h.pos);
+      sphere.userData = {index:i, title:h.title, desc:h.desc};
+      group.add(sphere);
+      hotspotMeshes.push(sphere);
+    });
+  }
+
+  function createFallbackCar(group) {
+    const w = 4;
+    const h = 1.5;
+    const d = 2;
+    const bodyMat = new THREE.MeshStandardMaterial({color:0x991813, metalness:0.6, roughness:0.4});
+    const body = new THREE.Mesh(new THREE.BoxGeometry(w, 0.8, d), bodyMat);
+    body.position.y = 0.6;
+    group.add(body);
+    const cabinMat = new THREE.MeshStandardMaterial({color:0x15151e, metalness:0.8, roughness:0.2});
+    const cabin = new THREE.Mesh(new THREE.BoxGeometry(2, 0.7, 1.6), cabinMat);
+    cabin.position.set(-0.2, 1.35, 0);
+    group.add(cabin);
+    const wheelMat = new THREE.MeshStandardMaterial({color:0x15151e, metalness:0.9, roughness:0.3});
+    const wheelGeo = new THREE.CylinderGeometry(0.4, 0.4, 0.3, 20);
+    const wheelPositions = [[-1.3,0.4,-0.95],[1.3,0.4,-0.95],[-1.3,0.4,0.95],[1.3,0.4,0.95]];
+    wheelPositions.forEach(pos=>{
+      const wheel = new THREE.Mesh(wheelGeo, wheelMat);
+      wheel.rotation.x = Math.PI/2;
+      wheel.position.set(pos[0], pos[1], pos[2]);
+      group.add(wheel);
+    });
+    const sphereRadius = Math.max(w, d) * 0.025;
+    const sideOffset = w * 0.50;
+    const frontZ = d * 0.48;
+    const rearZ = -d * 0.48;
+    const midY = 0.85;
+    const lowY = 0.55;
+    
+    const hotspotData = [
+      {pos:new THREE.Vector3(-w*0.28, midY, frontZ), title:"Escaneo OBD-II", desc:"Conectamos un escáner profesional al puerto OBD-II para detectar códigos de falla y adulteración del velocímetro."},
+      {pos:new THREE.Vector3( w*0.28, midY, frontZ), title:"Faros y luces delanteras", desc:"Verificamos luces, faros, dirección y sensores delanteros del vehículo."},
+      {pos:new THREE.Vector3(-w*0.28, midY, rearZ), title:"Estado legal y antecedentes", desc:"Revisión del historial del vehículo, propietarios anteriores y estado legal."},
+      {pos:new THREE.Vector3( w*0.28, midY, rearZ), title:"Luces traseras y escape", desc:"Verificamos luces traseras, sistema de escape y estado general del maletero."},
+      {pos:new THREE.Vector3( sideOffset, midY,  d*0.30), title:"Medición de pintura (delantero der.)", desc:"Medimos el espesor de pintura en el panel delantero derecho para detectar golpes y repintados ocultos."},
+      {pos:new THREE.Vector3( sideOffset, lowY,  0),       title:"Revisión de chasis lateral der.", desc:"Inspeccionamos soldaduras, largueros y puntos de anclaje del costado derecho para detectar accidentes estructurales."},
+      {pos:new THREE.Vector3( sideOffset, midY, -d*0.30), title:"Sistema eléctrico (trasero der.)", desc:"Verificamos batería, alternador y cableado del panel trasero derecho."},
+      {pos:new THREE.Vector3(-sideOffset, midY,  d*0.30), title:"Medición de pintura (delantero izq.)", desc:"Medimos el espesor de pintura en el panel delantero izquierdo para detectar golpes y repintados ocultos."},
+      {pos:new THREE.Vector3(-sideOffset, lowY,  0),       title:"Revisión de chasis lateral izq.", desc:"Inspeccionamos soldaduras, largueros y puntos de anclaje del costado izquierdo."},
+      {pos:new THREE.Vector3(-sideOffset, midY, -d*0.30), title:"Caja de cambios / Transmisión", desc:"Revisión de la caja (mecánica o automática) y desgaste interior del vehículo."},
+    ];
+
+    const hotspotMat = new THREE.MeshBasicMaterial({color:0x00a859});
+    hotspotData.forEach((h,i)=>{
+      const sphere = new THREE.Mesh(new THREE.SphereGeometry(sphereRadius, 20, 20), hotspotMat.clone());
+      sphere.position.copy(h.pos);
+      sphere.userData = {index:i, title:h.title, desc:h.desc};
+      group.add(sphere);
+      hotspotMeshes.push(sphere);
+    });
+  }
+
+  function updateTooltipPosition() {
+    if(!activeHotspot) return;
+    const rect = renderer.domElement.getBoundingClientRect();
+    const worldPos = new THREE.Vector3();
+    activeHotspot.getWorldPosition(worldPos);
+
+    const camDir = new THREE.Vector3();
+    camera.getWorldDirection(camDir);
+    const toHotspot = worldPos.clone().sub(camera.position);
+    if(toHotspot.dot(camDir) <= 0){
+      tooltip.classList.remove('visible');
+      return;
+    }
+
+    const projected = worldPos.clone().project(camera);
+    const x = (projected.x * 0.5 + 0.5) * rect.width;
+    const y = (-projected.y * 0.5 + 0.5) * rect.height;
+
+    tooltip.style.left = x + 'px';
+    tooltip.style.top = y + 'px';
+    tooltip.classList.add('visible');
+  }
+
+  renderer.domElement.addEventListener('mousemove', (e) => {
+    const rect = renderer.domElement.getBoundingClientRect();
+    mouse.x = ((e.clientX - rect.left) / rect.width) * 2 - 1;
+    mouse.y = -((e.clientY - rect.top) / rect.height) * 2 + 1;
+    raycaster.setFromCamera(mouse, camera);
+
+    const objectsToCheck = [...hotspotMeshes];
+    carGroup.traverse(child => {
+      if(child.isMesh && !hotspotMeshes.includes(child)){
+        objectsToCheck.push(child);
+      }
+    });
+
+    const intersects = raycaster.intersectObjects(objectsToCheck, true);
+    if(intersects.length > 0){
+      const firstHit = intersects[0].object;
+      if(hotspotMeshes.includes(firstHit)){
+        if(activeHotspot !== firstHit){
+          activeHotspot = firstHit;
+          tooltip.querySelector('h4').textContent = firstHit.userData.title;
+          tooltip.querySelector('p').textContent = firstHit.userData.desc;
+        }
+        updateTooltipPosition();
+      } else {
+        activeHotspot = null;
+        tooltip.classList.remove('visible');
+      }
+    } else {
+      activeHotspot = null;
+      tooltip.classList.remove('visible');
+    }
+  });
+
+  let isDragging = false;
+  let prevX = 0;
+  let prevY = 0;
+  let rotY = 0;
+  let rotX = 0;
+  
+  renderer.domElement.addEventListener('mousedown', (e) => {isDragging = true; prevX = e.clientX; prevY = e.clientY});
+  window.addEventListener('mouseup', () => {isDragging = false});
+  window.addEventListener('mousemove', (e) => {
+    if(!isDragging) return;
+    const deltaX = e.clientX - prevX;
+    const deltaY = e.clientY - prevY;
+    rotY += deltaX * 0.01;
+    rotX += deltaY * 0.01;
+    rotX = Math.max(-0.5, Math.min(0.5, rotX));
+    carGroup.rotation.y = rotY;
+    carGroup.rotation.x = rotX;
+    prevX = e.clientX;
+    prevY = e.clientY;
+  });
+  
+  renderer.domElement.addEventListener('touchstart', (e) => {if(e.touches.length === 1){isDragging = true; prevX = e.touches[0].clientX; prevY = e.touches[0].clientY}}, {passive:true});
+  renderer.domElement.addEventListener('touchend', () => {isDragging = false});
+  renderer.domElement.addEventListener('touchmove', (e) => {
+    if(!isDragging || e.touches.length !== 1) return;
+    const deltaX = e.touches[0].clientX - prevX;
+    const deltaY = e.touches[0].clientY - prevY;
+    rotY += deltaX * 0.01;
+    rotX += deltaY * 0.01;
+    rotX = Math.max(-0.5, Math.min(0.5, rotX));
+    carGroup.rotation.y = rotY;
+    carGroup.rotation.x = rotX;
+    prevX = e.touches[0].clientX;
+    prevY = e.touches[0].clientY;
+  }, {passive:true});
+
+  let lastTime = performance.now();
+  function animate(time) {
+    requestAnimationFrame(animate);
+    const delta = (time - lastTime) / 1000;
+    lastTime = time;
+    if(!isDragging){
+      rotY += 0.15 * delta;
+      carGroup.rotation.y = rotY;
+    }
+    hotspotMeshes.forEach((s, i) => {
+      const scale = 1 + Math.sin(time * 0.003 + i) * 0.25;
+      s.scale.setScalar(scale);
+    });
+    if(activeHotspot){
+      updateTooltipPosition();
+    }
+    renderer.render(scene, camera);
+  }
+  requestAnimationFrame(animate);
+  
+  window.addEventListener('resize', () => {
+    camera.aspect = container.clientWidth / container.clientHeight;
+    camera.updateProjectionMatrix();
+    renderer.setSize(container.clientWidth, container.clientHeight);
+  });
 }
-});
-carGroup.add(model);
-loadingEl.style.display='none';
-addHotspots(carGroup, size, scale);
-},function(xhr){
-const percent = Math.round((xhr.loaded / xhr.total) * 100);
-if (loadingEl) {
-loadingEl.innerHTML = '<i class="fas fa-spinner"></i><span>Cargando modelo 3D... ' + percent + '%</span>';
-}
-},function(error){
-console.error('Error cargando Carro3d.glb:',error);
-if (loadingEl) {
-loadingEl.innerHTML = '<div style="text-align:center; padding: 20px;"><i class="fas fa-exclamation-triangle" style="color: #ffd700; font-size: 2rem; margin-bottom: 10px;"></i><br><strong style="color: #fff;">No se pudo cargar el archivo Carro3d.glb</strong><br><span style="font-size: 0.9rem; color: #cbd5e1;">Revisa que el archivo esté en la misma carpeta, que se llame exactamente así y que uses un servidor local (no abras el archivo con doble clic).</span></div>';
-}
-createFallbackCar(carGroup);
-});
-const tooltip=document.getElementById('model3dTooltip');
-const raycaster=new THREE.Raycaster();
-const mouse=new THREE.Vector2();
-let hoveredIndex=-1;
-let hotspotMeshes=[];
-let activeHotspot = null;
 
-/* ============================================================
-   HOTSPOTS DEL MODELO REAL (.glb)
-   Distribución: 2 frente + 2 atrás + 3 derecha + 3 izquierda = 10
-   ============================================================ */
-function addHotspots(group, size, scale){
-const w = size.x * scale;
-const h = size.y * scale;
-const d = size.z * scale;
-
-const sphereRadius = Math.max(w, d) * 0.025;
-
-const sideOffset  = w * 0.50;
-const frontZ      = d * 0.48;
-const rearZ       = -d * 0.48;
-const midY        = h * 0.55;
-const lowY        = h * 0.35;
-
-const hotspotData = [
-// ───── FRENTE (2) ─────
-{pos:new THREE.Vector3(-w*0.28, midY, frontZ), title:"Escaneo OBD-II",
- desc:"Conectamos un escáner profesional al puerto OBD-II para detectar códigos de falla y adulteración del velocímetro."},
-{pos:new THREE.Vector3( w*0.28, midY, frontZ), title:"Faros y luces delanteras",
- desc:"Verificamos luces, faros, dirección y sensores delanteros del vehículo."},
-
-// ───── ATRÁS (2) ─────
-{pos:new THREE.Vector3(-w*0.28, midY, rearZ), title:"Estado legal y antecedentes",
- desc:"Revisión del historial del vehículo, propietarios anteriores y estado legal."},
-{pos:new THREE.Vector3( w*0.28, midY, rearZ), title:"Luces traseras y escape",
- desc:"Verificamos luces traseras, sistema de escape y estado general del maletero."},
-
-// ───── LADO DERECHO (3) ─────
-{pos:new THREE.Vector3( sideOffset, midY,  d*0.30), title:"Medición de pintura (delantero der.)",
- desc:"Medimos el espesor de pintura en el panel delantero derecho para detectar golpes y repintados ocultos."},
-{pos:new THREE.Vector3( sideOffset, lowY,  0),       title:"Revisión de chasis lateral der.",
- desc:"Inspeccionamos soldaduras, largueros y puntos de anclaje del costado derecho para detectar accidentes estructurales."},
-{pos:new THREE.Vector3( sideOffset, midY, -d*0.30), title:"Sistema eléctrico (trasero der.)",
- desc:"Verificamos batería, alternador y cableado del panel trasero derecho."},
-
-// ───── LADO IZQUIERDO (3) ─────
-{pos:new THREE.Vector3(-sideOffset, midY,  d*0.30), title:"Medición de pintura (delantero izq.)",
- desc:"Medimos el espesor de pintura en el panel delantero izquierdo para detectar golpes y repintados ocultos."},
-{pos:new THREE.Vector3(-sideOffset, lowY,  0),       title:"Revisión de chasis lateral izq.",
- desc:"Inspeccionamos soldaduras, largueros y puntos de anclaje del costado izquierdo."},
-{pos:new THREE.Vector3(-sideOffset, midY, -d*0.30), title:"Caja de cambios / Transmisión",
- desc:"Revisión de la caja (mecánica o automática) y desgaste interior del vehículo."},
-];
-
-const hotspotMat = new THREE.MeshBasicMaterial({color:0x00a859});
-hotspotData.forEach((h,i)=>{
-const sphere=new THREE.Mesh(new THREE.SphereGeometry(sphereRadius,20,20),hotspotMat.clone());
-sphere.position.copy(h.pos);
-sphere.userData={index:i,title:h.title,desc:h.desc};
-group.add(sphere);
-hotspotMeshes.push(sphere);
-});
-}
-
-/* ============================================================
-   CARRO DE RESPALDO (si falla el .glb) — misma distribución
-   ============================================================ */
-function createFallbackCar(group){
-const w = 4;
-const h = 1.5;
-const d = 2;
-
-const bodyMat=new THREE.MeshStandardMaterial({color:0x991813,metalness:0.6,roughness:0.4});
-const body=new THREE.Mesh(new THREE.BoxGeometry(w,0.8,d),bodyMat);
-body.position.y=0.6;
-group.add(body);
-
-const cabinMat=new THREE.MeshStandardMaterial({color:0x15151e,metalness:0.8,roughness:0.2});
-const cabin=new THREE.Mesh(new THREE.BoxGeometry(2,0.7,1.6),cabinMat);
-cabin.position.set(-0.2,1.35,0);
-group.add(cabin);
-
-const wheelMat=new THREE.MeshStandardMaterial({color:0x15151e,metalness:0.9,roughness:0.3});
-const wheelGeo=new THREE.CylinderGeometry(0.4,0.4,0.3,20);
-const wheelPositions=[[-1.3,0.4,-0.95],[1.3,0.4,-0.95],[-1.3,0.4,0.95],[1.3,0.4,0.95]];
-wheelPositions.forEach(pos=>{
-const wheel=new THREE.Mesh(wheelGeo,wheelMat);
-wheel.rotation.x=Math.PI/2;
-wheel.position.set(pos[0],pos[1],pos[2]);
-group.add(wheel);
-});
-
-const sphereRadius = Math.max(w, d) * 0.025;
-const sideOffset  = w * 0.50;
-const frontZ      = d * 0.48;
-const rearZ       = -d * 0.48;
-const midY        = 0.85;
-const lowY        = 0.55;
-
-const hotspotData = [
-// FRENTE (2)
-{pos:new THREE.Vector3(-w*0.28, midY, frontZ), title:"Escaneo OBD-II",
- desc:"Conectamos un escáner profesional al puerto OBD-II para detectar códigos de falla y adulteración del velocímetro."},
-{pos:new THREE.Vector3( w*0.28, midY, frontZ), title:"Faros y luces delanteras",
- desc:"Verificamos luces, faros, dirección y sensores delanteros del vehículo."},
-// ATRÁS (2)
-{pos:new THREE.Vector3(-w*0.28, midY, rearZ), title:"Estado legal y antecedentes",
- desc:"Revisión del historial del vehículo, propietarios anteriores y estado legal."},
-{pos:new THREE.Vector3( w*0.28, midY, rearZ), title:"Luces traseras y escape",
- desc:"Verificamos luces traseras, sistema de escape y estado general del maletero."},
-// DERECHA (3)
-{pos:new THREE.Vector3( sideOffset, midY,  d*0.30), title:"Medición de pintura (delantero der.)",
- desc:"Medimos el espesor de pintura en el panel delantero derecho para detectar golpes y repintados ocultos."},
-{pos:new THREE.Vector3( sideOffset, lowY,  0),       title:"Revisión de chasis lateral der.",
- desc:"Inspeccionamos soldaduras, largueros y puntos de anclaje del costado derecho para detectar accidentes estructurales."},
-{pos:new THREE.Vector3( sideOffset, midY, -d*0.30), title:"Sistema eléctrico (trasero der.)",
- desc:"Verificamos batería, alternador y cableado del panel trasero derecho."},
-// IZQUIERDA (3)
-{pos:new THREE.Vector3(-sideOffset, midY,  d*0.30), title:"Medición de pintura (delantero izq.)",
- desc:"Medimos el espesor de pintura en el panel delantero izquierdo para detectar golpes y repintados ocultos."},
-{pos:new THREE.Vector3(-sideOffset, lowY,  0),       title:"Revisión de chasis lateral izq.",
- desc:"Inspeccionamos soldaduras, largueros y puntos de anclaje del costado izquierdo."},
-{pos:new THREE.Vector3(-sideOffset, midY, -d*0.30), title:"Caja de cambios / Transmisión",
- desc:"Revisión de la caja (mecánica o automática) y desgaste interior del vehículo."},
-];
-
-const hotspotMat=new THREE.MeshBasicMaterial({color:0x00a859});
-hotspotData.forEach((h,i)=>{
-const sphere=new THREE.Mesh(new THREE.SphereGeometry(sphereRadius,20,20),hotspotMat.clone());
-sphere.position.copy(h.pos);
-sphere.userData={index:i,title:h.title,desc:h.desc};
-group.add(sphere);
-hotspotMeshes.push(sphere);
-});
-}
-
-/* ============================================================
-   TOOLTIP — se recalcula cada frame y respeta oclusión
-   ============================================================ */
-function updateTooltipPosition(){
- if(!activeHotspot){ return; }
- const rect = renderer.domElement.getBoundingClientRect();
- const worldPos = new THREE.Vector3();
- activeHotspot.getWorldPosition(worldPos);
-
- // ¿Está delante de la cámara?
- const camDir = new THREE.Vector3();
- camera.getWorldDirection(camDir);
- const toHotspot = worldPos.clone().sub(camera.position);
- if(toHotspot.dot(camDir) <= 0){
-   tooltip.classList.remove('visible');
-   return;
- }
-
- const projected = worldPos.clone().project(camera);
- const x = (projected.x * 0.5 + 0.5) * rect.width;
- const y = (-projected.y * 0.5 + 0.5) * rect.height;
-
- tooltip.style.left = x + 'px';
- tooltip.style.top  = y + 'px';
- tooltip.classList.add('visible');
-}
-
-renderer.domElement.addEventListener('mousemove',(e)=>{
- const rect = renderer.domElement.getBoundingClientRect();
- mouse.x = ((e.clientX - rect.left) / rect.width) * 2 - 1;
- mouse.y = -((e.clientY - rect.top) / rect.height) * 2 + 1;
- raycaster.setFromCamera(mouse, camera);
-
- // Detectar bolitas Y modelo del carro para respetar oclusión
- const objectsToCheck = [...hotspotMeshes];
- carGroup.traverse(child => {
-   if(child.isMesh && !hotspotMeshes.includes(child)){
-     objectsToCheck.push(child);
-   }
- });
-
- const intersects = raycaster.intersectObjects(objectsToCheck, true);
- if(intersects.length > 0){
-   const firstHit = intersects[0].object;
-   if(hotspotMeshes.includes(firstHit)){
-     if(activeHotspot !== firstHit){
-       activeHotspot = firstHit;
-       tooltip.querySelector('h4').textContent = firstHit.userData.title;
-       tooltip.querySelector('p').textContent  = firstHit.userData.desc;
-     }
-     updateTooltipPosition();
-   } else {
-     activeHotspot = null;
-     tooltip.classList.remove('visible');
-   }
- } else {
-   activeHotspot = null;
-   tooltip.classList.remove('visible');
- }
-});
-
-let isDragging=false;
-let prevX=0;
-let prevY=0;
-let rotY=0;
-let rotX=0;
-renderer.domElement.addEventListener('mousedown',(e)=>{isDragging=true;prevX=e.clientX;prevY=e.clientY});
-window.addEventListener('mouseup',()=>{isDragging=false});
-window.addEventListener('mousemove',(e)=>{
-if(!isDragging)return;
-const deltaX=e.clientX-prevX;
-const deltaY=e.clientY-prevY;
-rotY+=deltaX*0.01;
-rotX+=deltaY*0.01;
-rotX=Math.max(-0.5,Math.min(0.5,rotX));
-carGroup.rotation.y=rotY;
-carGroup.rotation.x=rotX;
-prevX=e.clientX;
-prevY=e.clientY;
-});
-renderer.domElement.addEventListener('touchstart',(e)=>{if(e.touches.length===1){isDragging=true;prevX=e.touches[0].clientX;prevY=e.touches[0].clientY}},{passive:true});
-renderer.domElement.addEventListener('touchend',()=>{isDragging=false});
-renderer.domElement.addEventListener('touchmove',(e)=>{
-if(!isDragging||e.touches.length!==1)return;
-const deltaX=e.touches[0].clientX-prevX;
-const deltaY=e.touches[0].clientY-prevY;
-rotY+=deltaX*0.01;
-rotX+=deltaY*0.01;
-rotX=Math.max(-0.5,Math.min(0.5,rotX));
-carGroup.rotation.y=rotY;
-carGroup.rotation.x=rotX;
-prevX=e.touches[0].clientX;
-prevY=e.touches[0].clientY;
-},{passive:true});
-let lastTime=performance.now();
-function animate(time){
- requestAnimationFrame(animate);
- const delta=(time-lastTime)/1000;
- lastTime=time;
- if(!isDragging){
-   rotY+=0.15*delta;
-   carGroup.rotation.y=rotY;
- }
- hotspotMeshes.forEach((s,i)=>{
-   const scale=1+Math.sin(time*0.003+i)*0.25;
-   s.scale.setScalar(scale);
- });
- // Recalcular tooltip cada frame para que siga a la bolita al girar
- if(activeHotspot){
-   updateTooltipPosition();
- }
- renderer.render(scene,camera);
-}
-requestAnimationFrame(animate);
-window.addEventListener('resize',()=>{
-camera.aspect=container.clientWidth/container.clientHeight;
-camera.updateProjectionMatrix();
-renderer.setSize(container.clientWidth,container.clientHeight);
-});
-}
-document.addEventListener('DOMContentLoaded',function(){
-const calculatorInputs=document.querySelectorAll('.calc-select, input[type="checkbox"]');
-calculatorInputs.forEach(input=>{input.addEventListener('change',updateCalculator)});
-updateCalculator();
-animateProcessSteps();
-const contactForm=document.getElementById('contactForm');
-if(contactForm){
-contactForm.addEventListener('submit',function(e){
-e.preventDefault();
-const submitButton=this.querySelector('button[type="submit"]');
-submitButton.disabled=true;
-submitButton.textContent='Enviando...';
-const formData=new FormData(this);
-fetch(this.action,{method:'POST',body:formData,headers:{'Accept':'application/json'}})
-.then(response=>{
-if(response.ok){
-alert('Solicitud enviada con éxito. Nos pondremos en contacto contigo pronto.');
-contactForm.reset();
-}else{throw new Error('Error al enviar el formulario')}
-})
-.catch(error=>{
-alert('Hubo un problema al enviar tu solicitud. Por favor, inténtalo de nuevo más tarde.');
-console.error(error);
-})
-.finally(()=>{
-submitButton.disabled=false;
-submitButton.textContent='ENVIAR SOLICITUD';
-});
-});
-}
-const stickyCta=document.getElementById('stickyCta');
-window.addEventListener('scroll',()=>{
-if(window.innerWidth<=768){
-if(window.scrollY>500){
-stickyCta.style.display='block';
-}else{
-stickyCta.style.display='none';
-}
-}
-});
-const model3dViewer=document.getElementById('model3dViewer');
-const model3dLoading=document.getElementById('model3dLoading');
-const scriptGLTF=document.createElement('script');
-scriptGLTF.src='https://cdn.jsdelivr.net/npm/three@0.128.0/build/three.min.js';
-scriptGLTF.onload=function(){
-const loaderScript=document.createElement('script');
-loaderScript.src='https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/GLTFLoader.js';
-loaderScript.onload=function(){
-initCarModel(model3dViewer,model3dLoading);
-};
-document.body.appendChild(loaderScript);
-};
-document.body.appendChild(scriptGLTF);
+document.addEventListener('DOMContentLoaded', () => {
+  const model3dViewer = document.getElementById('model3dViewer');
+  const model3dLoading = document.getElementById('model3dLoading');
+  if(model3dViewer && model3dLoading){
+    initCarModel(model3dViewer, model3dLoading);
+  }
 });
 </script>
 </body>
